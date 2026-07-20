@@ -147,32 +147,6 @@
     color-scheme: light;
   }
 
-  /* System Preference Fallback */
-  @media (prefers-color-scheme: light) {
-    :root:not(.light):not(.dark) {
-      --bg: #ffffff;
-      --surface: #f8fafc;
-      --fg: #1e293b;
-      --fg-h: #0f172a;
-      --muted: #64748b;
-      --border: #e2e8f0;
-
-      --accent: #6d28d9;
-      --accent-bg: rgba(109, 40, 217, 0.08);
-      --accent-border: rgba(109, 40, 217, 0.25);
-
-      --success: #10b981;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-
-      --sh-base: 0 4px 12px rgba(15, 23, 42, 0.04), 0 1px 4px var(--border);
-      --sh-base-hover: 0 0 0 2px rgba(109, 40, 217, 0.15);
-      --sh-accent: 0 0 12px var(--accent-border);
-      --sh-accent-hover: 0 0 18px rgba(109, 40, 217, 0.25);
-
-      color-scheme: light;
-    }
-  }
 
   ::selection {
     @apply bg-muted/20;
