@@ -1,16 +1,115 @@
-# React + Vite
+# SaaS Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, responsive SaaS admin dashboard built with **React 19** and **Vite**. Styled with **Tailwind CSS** and **Material UI**, with interactive charts powered by **Recharts**.
 
-Currently, two official plugins are available:
+## ✨ Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **Vite** — fast dev server and build tool
+- **Tailwind CSS 4** — utility-first styling
+- **Material UI (MUI)** — pre-built UI components and icons
+- **Recharts** — data visualization / charts
+- **React Syntax Highlighter** — code block rendering
+- **ESLint + Prettier** — linting and formatting
 
-## React Compiler
+## 🚀 Getting Started
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+# Clone the repository
+git clone https://github.com/ImRez69/SaaS-Dashboard.git
+cd SaaS-Dashboard
 
-## Expanding the ESLint configuration
+# Install dependencies
+npm install
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Start the development server
+npm run dev
+```
+
+## 📦 Available Scripts
+
+| Command           | Description                       |
+| ------------------ | ---------------------------------- |
+| `npm run dev`     | Start the local development server |
+| `npm run build`   | Build the app for production       |
+| `npm run preview` | Preview the production build       |
+| `npm run lint`    | Run ESLint checks                  |
+
+## 📁 Project Structure
+
+```
+SaaS-Dashboard/
+├── public/          # Static assets
+├── src/             # Application source code
+├── index.html       # HTML entry point
+├── vite.config.js    # Vite configuration
+└── package.json
+```
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome. Feel free to open a pull request.
+
+## 📄 License
+
+This project is currently unlicensed. Add a license file if you plan to open-source it publicly.
+
+---
+
+<div dir="rtl">
+
+# داشبورد SaaS
+
+یک داشبورد مدیریتی مدرن و ریسپانسیو برای SaaS که با **React 19** و **Vite** ساخته شده. استایل‌دهی با **Tailwind CSS** و **Material UI**، همراه با نمودارهای تعاملی با **Recharts**.
+
+## ✨ تکنولوژی‌های استفاده‌شده
+
+- **React 19** + **Vite** — سرور توسعه و ابزار بیلد سریع
+- **Tailwind CSS 4** — استایل‌دهی utility-first
+- **Material UI (MUI)** — کامپوننت‌ها و آیکون‌های آماده
+- **Recharts** — نمودار و بصری‌سازی داده
+- **React Syntax Highlighter** — نمایش بلاک‌های کد
+- **ESLint + Prettier** — لینت و فرمت‌دهی کد
+
+## 🚀 شروع کار
+
+```bash
+# کلون کردن ریپازیتوری
+git clone https://github.com/ImRez69/SaaS-Dashboard.git
+cd SaaS-Dashboard
+
+# نصب پکیج‌ها
+npm install
+
+# اجرای سرور توسعه
+npm run dev
+```
+
+## 📦 دستورات موجود
+
+| دستور              | توضیح                              |
+| ------------------ | ----------------------------------- |
+| `npm run dev`     | اجرای سرور توسعه محلی                |
+| `npm run build`   | ساخت نسخه‌ی نهایی برای پروداکشن        |
+| `npm run preview` | پیش‌نمایش نسخه‌ی نهایی                |
+| `npm run lint`    | بررسی کد با ESLint                  |
+
+## 📁 ساختار پروژه
+
+```
+SaaS-Dashboard/
+├── public/          # فایل‌های استاتیک
+├── src/             # کد اصلی برنامه
+├── index.html       # نقطه‌ی ورود HTML
+├── vite.config.js    # تنظیمات Vite
+└── package.json
+```
+
+## 🤝 مشارکت
+
+مشارکت، گزارش باگ و پیشنهاد ویژگی جدید با کمال میل پذیرفته می‌شود. برای مشارکت یک Pull Request ارسال کنید.
+
+## 📄 لایسنس
+
+این پروژه در حال حاضر بدون لایسنس است. اگر قصد انتشار عمومی دارید، یک فایل لایسنس اضافه کنید.
+
+</div>
