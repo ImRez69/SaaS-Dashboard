@@ -1,0 +1,316 @@
+@import "tailwindcss";
+
+/* Font Definitions */
+@font-face {
+  font-family: "Vazirmatn-RD";
+  src:
+    local("Vazirmatn RD"),
+    url("./assets/fonts/Vazirmatn-RD-Regular.ttf") format("truetype");
+}
+
+/* Custom Variants (dark: - light:) */
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant light (&:where(.light, .light *));
+
+/* Theme Style */
+@theme {
+  /* Layout & Surface Colors */
+  --color-background: var(--bg); /* App background */
+  --color-surface: var(--surface); /* Cards & panels background*/
+  --color-foreground: var(--fg); /* Body text */
+  --color-foreground-h: var(--fg-h); /* Headings & titles */
+  --color-muted: var(--muted); /* Secondary/Muted text */
+  --color-border: var(--border); /* Borders & dividers */
+
+  /* Brand(Active Item - Focus Ring) / Accent Colors */
+  --color-accent: var(--accent); /* Primary brand & buttons */
+  --color-accent-bg: var(--accent-bg); /* Active state & hover bg */
+  --color-accent-border: var(--accent-border); /* Active border & focus ring */
+
+  /* System Status Colors */
+  --color-success: var(--success); /* Success status & active badges */
+  --color-warning: var(--warning); /* Warning status & pending badges */
+  --color-danger: var(--danger); /* Error status & delete actions */
+
+  /* Dynamic Shadows */
+  --shadow-base: var(--sh-base); /* Card elevation */
+  --shadow-base-hover: var(--sh-base-hover); /* Card elevation hover */
+  --shadow-accent: var(--sh-accent); /* Soft brand glow */
+  --shadow-accent-hover: var(--sh-accent-hover); /* Hover brand glow */
+
+  /* Animations */
+  --animate-arrow: arrow 2s ease-in-out infinite;
+  --animate-modal-in: modal-in 0.25s ease-out forwards;
+  --animate-modal-out: modal-out 0.2s ease-in forwards;
+  --animate-backdrop-in: backdrop-in 0.25s ease-out forwards;
+  --animate-backdrop-out: backdrop-out 0.2s ease-in forwards;
+
+  @keyframes arrow {
+    0%,
+    100% {
+      transform: translateY(0.6rem);
+    }
+    50% {
+      transform: translateY(-0.6rem);
+    }
+  }
+
+  @keyframes modal-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes modal-out {
+    0% {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+  }
+
+  @keyframes backdrop-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes backdrop-out {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}
+
+/* Base Styles & Theme Palette Configuration */
+@layer base {
+  /* Modern Obsidian Dark Mode Palette (Based on Dark Screenshot) */
+  :root {
+    --bg: #0b0b0f;
+    --surface: #121218; /* باکس‌ها و سایدبار سرفیس */
+    --fg: #d4d4d8; /* متن بدنه نقره‌ای نرم */
+    --fg-h: #ffffff; /* عناوین کاملاً سفید و درخشان */
+    --muted: #6b7280; /* متن‌های ثانویه و آیکون‌های کم‌رنگ */
+    --border: #1f1f29; /* خطوط جداکننده بسیار ظریف */
+
+    --accent: #2563eb; /* آبی کبالت پرمیوم و زنده */
+    --accent-bg: rgba(37, 99, 235, 0.12); /* هاور یا پس‌زمینه تب اکتیو دارک */
+    --accent-border: rgba(37, 99, 235, 0.35);
+
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+
+    --sh-base: 0 4px 16px rgba(0, 0, 0, 0.45), 0 1px 4px var(--border);
+    --sh-base-hover: 0 0 0 2px rgba(37, 99, 235, 0.25);
+    --sh-accent: 0 0 12px var(--accent-border);
+    --sh-accent-hover: 0 0 20px rgba(37, 99, 235, 0.45);
+
+    color-scheme: dark;
+  }
+
+  /* Premium Minimalist Light Mode Palette (Based on Light Screenshot) */
+  :root.light {
+    --bg: #ffffff;
+    --surface: #f8fafc;
+    --fg: #1e293b;
+    --fg-h: #0f172a;
+    --muted: #64748b;
+    --border: #e2e8f0;
+
+    --accent: #1d4ed8;
+    --accent-bg: rgba(29, 78, 216, 0.08);
+    --accent-border: rgba(29, 78, 216, 0.25);
+
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+
+    --sh-base: 0 4px 12px rgba(15, 23, 42, 0.04), 0 1px 4px var(--border);
+    --sh-base-hover: 0 0 0 2px rgba(29, 78, 216, 0.2);
+    --sh-accent: 0 0 12px var(--accent-border);
+    --sh-accent-hover: 0 0 18px rgba(29, 78, 216, 0.3);
+    color-scheme: light;
+  }
+
+  /* System Preference Fallback */
+  @media (prefers-color-scheme: light) {
+    :root:not(.light):not(.dark) {
+      --bg: #ffffff;
+      --surface: #f8fafc;
+      --fg: #1e293b;
+      --fg-h: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+
+      --accent: #6d28d9;
+      --accent-bg: rgba(109, 40, 217, 0.08);
+      --accent-border: rgba(109, 40, 217, 0.25);
+
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+
+      --sh-base: 0 4px 12px rgba(15, 23, 42, 0.04), 0 1px 4px var(--border);
+      --sh-base-hover: 0 0 0 2px rgba(109, 40, 217, 0.15);
+      --sh-accent: 0 0 12px var(--accent-border);
+      --sh-accent-hover: 0 0 18px rgba(109, 40, 217, 0.25);
+
+      color-scheme: light;
+    }
+  }
+
+  ::selection {
+    @apply bg-muted/20;
+  }
+
+  /* Reset & Element Defaults */
+  * {
+    outline: none;
+    box-sizing: border-box;
+    scrollbar-width: 8px;
+    scrollbar-color: var(--color-border) var(--surface);
+  }
+
+  :root {
+    font-family: "Vazirmatn-RD", system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.45;
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-foreground-h font-bold capitalize;
+  }
+
+  h1 {
+    @apply text-4xl font-extrabold;
+  }
+  h2 {
+    @apply text-3xl font-bold;
+  }
+  h3 {
+    @apply text-2xl font-bold;
+  }
+  h4 {
+    @apply text-xl font-semibold;
+  }
+  h5 {
+    @apply text-lg font-semibold;
+  }
+  h6 {
+    @apply text-base font-medium;
+  }
+
+  a {
+    @apply text-accent no-underline transition-opacity duration-200 hover:opacity-80;
+  }
+
+  img,
+  video {
+    @apply inline-block h-auto max-w-full;
+  }
+
+  input {
+    @apply border-border bg-surface text-foreground rounded-md border p-2 duration-200 ease-linear;
+    transition-property: box-shadow, background-color, color;
+    transition-duration: 200ms;
+    transition-timing-function: linear;
+  }
+
+  input:hover,
+  input:focus {
+    @apply shadow-base-hover;
+  }
+
+  select {
+    appearance: none;
+    background-color: var(--surface);
+    color: var(--color-foreground);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem 0.5rem 2.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    outline: none;
+    cursor: pointer;
+    transition: box-shadow 200ms linear;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236b7280' stroke-width='2'><path stroke-linecap='round' stroke-linejoin='round' d='M19.5 8.25l-7.5 7.5-7.5-7.5'/></svg>");
+    background-repeat: no-repeat;
+    background-position: left 0.75rem center;
+    background-size: 1rem;
+  }
+
+  select:focus,
+  select:hover {
+    box-shadow: var(--sh-base-hover);
+  }
+
+  option {
+    background-color: var(--surface);
+    color: var(--color-foreground);
+    padding: 0.5rem;
+  }
+
+  .disable-transitions *,
+  .disable-transitions *::before,
+  .disable-transitions *::after {
+    transition: none !important;
+  }
+}
+
+/* Custom Utility Classes */
+@utility flex-center {
+  @apply flex items-center justify-center;
+}
+@utility flex-center-start {
+  @apply flex items-center justify-start;
+}
+@utility flex-center-between {
+  @apply flex items-center justify-between;
+}
+@utility flex-center-end {
+  @apply flex items-center justify-end;
+}
+@utility flex-start-center {
+  @apply flex items-start justify-center;
+}
+@utility flex-start-between {
+  @apply flex items-start justify-between;
+}
+
+@utility word-spacing-hover-anime {
+  word-spacing: normal;
+  opacity: 1;
+  transition-property: word-spacing, opacity;
+  transition-duration: var(--default-transition-duration);
+  transition-timing-function: var(
+    --default-transition-timing-function,
+    cubic-bezier(0.4, 0, 0.2, 1)
+  );
+
+  &:hover {
+    word-spacing: 10px;
+    opacity: 0.5;
+  }
+}

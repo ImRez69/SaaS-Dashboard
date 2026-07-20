@@ -1,0 +1,70 @@
+// src/data/mockData.js
+
+export const initialStats = [
+  {
+    id: 1,
+    title: "مجموع درآمد",
+    value: "$45,200",
+    change: "+12%",
+    isPositive: true,
+  },
+  {
+    id: 2,
+    title: "کاربران فعال",
+    value: "3,890",
+    change: "+8%",
+    isPositive: true,
+  },
+  {
+    id: 3,
+    title: "سفارشات جدید",
+    value: "1,120",
+    change: "-3%",
+    isPositive: false,
+  },
+];
+
+export const initialUsers = [
+  {
+    id: "usr-1",
+    name: "علی محمدی",
+    email: "ali@example.com",
+    role: "مدیر",
+    status: "active",
+  },
+  {
+    id: "usr-2",
+    name: "مریم رضایی",
+    email: "maryam@example.com",
+    role: "نویسنده",
+    status: "inactive",
+  },
+  {
+    id: "usr-3",
+    name: "رضا حسینی",
+    email: "reza@example.com",
+    role: "کاربر",
+    status: "pending",
+  },
+];
+
+export const initialPractices = [
+  {
+    id: "prc-1",
+    chapter: 1,
+    subTopic: "1.8",
+    title: "Keeping Components Pure",
+    status: "completed", // "todo" | "in_progress" | "completed"
+    difficulty: "hard", // "easy" | "medium" | "hard"
+    description: "توابع رندر نباید هیچ متغیری خارج از دامنه خود را تغییر دهند.",
+  },
+  {
+    id: "prc-2",
+    chapter: 2,
+    subTopic: "2.3",
+    title: "Render and Commit",
+    status: "in_progress",
+    difficulty: "medium",
+    description: "بررسی ۳ مرحله: Trigger ،Render و Commit در DOM.",
+  },
+];

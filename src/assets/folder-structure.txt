@@ -1,0 +1,60 @@
+src/
+├── assets/             --> فونت‌ها و تصاویر
+│   └── fonts/
+├── components/         --> تمامی کامپوننت‌ها
+│   ├── ui/             --> کامپوننت‌های کوچک و عمومی (Badge, Button, Input و ...)
+│   ├── layout/         --> عناصر ساختاری صفحه (MainLayout, Sidebar, Topbar)
+│   └── dashboard/      --> کامپوننت‌های اختصاصی داشبورد (StatCard, UsersTable)
+├── data/               --> دیتای اولیه و تست (mockData.js)
+├── utils/              --> توابع کمکی (Helper functions)
+├── App.jsx             --> کامپوننت اصلی
+├── index.css           --> استایل‌های پایه و Tailwind
+└── main.jsx            --> نقطه ورود برنامه
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+src/
+├── assets/                  # تصاویر، آیکون‌ها و فایل‌های ایستا
+├── components/
+│   ├── common/              # کامپوننت‌های عمومی و کوچک
+│   │   ├── Badge.jsx
+│   │   ├── Button.jsx
+│   │   └── Modal.jsx
+│   ├── layout/              # کامپوننت‌های ساختار اصلی
+│   │   ├── MainLayout.jsx
+│   │   ├── Sidebar.jsx
+│   │   └── Topbar.jsx
+│   ├── dashboard/           # کامپوننت‌های اختصاصی صفحه اصلی داشبورد
+│   │   ├── StatCard.jsx
+│   │   └── UsersTable.jsx
+│   └── practices/           # کامپوننت‌های اختصاصی بخش تمرین‌ها
+│       ├── PracticeCard.jsx
+│       └── PracticeList.jsx
+├── data/
+│   └── mockData.js          # داده‌های اولیه و فرضی برای فاز اول
+├── utils/
+│   └── calculations.js      # توابع خالص محاسباتی (Pure Functions)
+├── App.jsx
+├── main.jsx
+└── index.css
+
