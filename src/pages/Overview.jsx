@@ -12,9 +12,7 @@ import {
 export default function Overview() {
   return (
     <div className="flex flex-col gap-6">
-      <h1 className="text-foreground word-spacing-hover-anime text-2xl font-bold">
-        نمای کلی داشبورد
-      </h1>
+      <h1 className="text-foreground text-2xl font-bold">نمای کلی داشبورد</h1>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <MinStatCard title="درآمد کلی" value={"45،000،000 " + "تومان"}>

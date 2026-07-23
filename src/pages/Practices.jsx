@@ -39,9 +39,7 @@ export default function Practices() {
 
   return (
     <div className="flex flex-col items-center gap-6">
-      <h1 className="text-foreground word-spacing-hover-anime w-full text-2xl font-bold">
-        تمرین ها
-      </h1>
+      <h1 className="text-foreground w-full text-2xl font-bold">تمرین ها</h1>
       <div className="flex w-full flex-col justify-center gap-4">
         <div className="flex w-full justify-center gap-4">
           <div className="w-1/4">
