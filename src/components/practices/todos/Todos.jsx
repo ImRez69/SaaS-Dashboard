@@ -59,7 +59,7 @@ export default function Todos() {
     setSearchQuery("");
   };
 
-  const handleChangeTodo = (todoId, newTitleValue) => {
+  const handleChangeTodoTitle = (todoId, newTitleValue) => {
     todosDispatch({
       type: "titleChanged",
       id: todoId,
@@ -112,7 +112,7 @@ export default function Todos() {
           <TodoList
             todos={filteredTodos}
             onStatusToggle={handleStatusToggle}
-            onChangeTodo={handleChangeTodo}
+            onChangeTodo={handleChangeTodoTitle}
             onDeleteTodo={handleDeleteTodo}
             onClearAllTodo={handleClearAllTodo}
           />
