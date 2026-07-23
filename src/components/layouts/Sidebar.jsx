@@ -7,11 +7,9 @@ import Avatar from "../ui/avatar";
 import SidebarIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import Button from "../ui/Button";
 export default function Sidebar({ activeId, onSetStatus }) {
-  const [isOpen, setIsOpen] = useState(() => {
-    const savedIsOpen = JSON.parse(localStorage.getItem("sideBarIsOpen"));
-    return savedIsOpen ? savedIsOpen : true;
-  });
-  console.log(isOpen);
+  const [isOpen, setIsOpen] = useState(() =>
+    JSON.parse(localStorage.getItem("sideBarIsOpen")) === false ? false : true,
+  );
 
   return (
     <aside
