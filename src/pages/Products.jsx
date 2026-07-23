@@ -46,7 +46,7 @@ export default function Products() {
         <div className="flex w-full justify-between gap-4">
           <div className="w-1/4">
             <MinStatCard
-              title={"ارزش کل انبار (محصولات)"}
+              title={"ارزش کل انبار"}
               value={productsDetails.sumProductsPrice + " تومان"}
             >
               <p>

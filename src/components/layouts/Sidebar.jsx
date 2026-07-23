@@ -1,10 +1,14 @@
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { sidebarListItems } from "../../data/SidebarData";
 import Logo from "../../assets/react.svg";
 import ThemeToggle from "../ui/ThemeToggle";
-import { sidebarListItems } from "../../data/SidebarData";
 import Avatar from "../ui/avatar";
+import ToggleSidebar from "../ui/ToggleSidebar";
 
 export default function Sidebar({ activeId, onSetStatus }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <aside className="bg-surface border-border sticky top-0 flex h-screen w-64 flex-col gap-0.5 border-l">
       <div className="border-border flex h-16 items-center border-b px-2">
@@ -26,6 +30,7 @@ export default function Sidebar({ activeId, onSetStatus }) {
               item={item}
               status={item.id === activeId}
               onSetStatus={onSetStatus}
+              sidebarIsOpen={isOpen}
             />
           ))}
         </ul>
@@ -37,13 +42,19 @@ export default function Sidebar({ activeId, onSetStatus }) {
           onlyImage
         />
 
-        <ThemeToggle />
+        <div className="flex gap-2">
+          <ThemeToggle />
+          <ToggleSidebar
+            isOpen={isOpen}
+            onClick={() => setIsOpen((prev) => !prev)}
+          />
+        </div>
       </div>
     </aside>
   );
 }
 
-function ListItem({ item, status, onSetStatus }) {
+function ListItem({ item, status, onSetStatus, sidebarIsOpen }) {
   return (
     <li
       className={twMerge(

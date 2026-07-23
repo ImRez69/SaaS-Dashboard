@@ -1,9 +1,9 @@
 import { twMerge } from "tailwind-merge";
 import { useState } from "react";
-import DeleteIcon from "./DeleteIcon.jsx";
-import EditIcon from "./EditIcon.jsx";
-import ConfirmIcon from "./ConfirmIcon.jsx";
-import CancelIcon from "./CancelIcon.jsx";
+import DeleteIcon from "./icon/DeleteIcon.jsx";
+import EditIcon from "./icon/EditIcon.jsx";
+import ConfirmIcon from "./icon/ConfirmIcon.jsx";
+import CancelIcon from "./icon/CancelIcon.jsx";
 
 export default function TodoItems({
   todo,
@@ -20,7 +20,6 @@ export default function TodoItems({
     setEditMode(false);
     editTodoTitle(todo?.id, editInputValue);
   };
-  console.log(todo);
 
   return (
     <li className="flex-center min-h-30 w-full">

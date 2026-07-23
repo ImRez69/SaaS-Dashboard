@@ -1,7 +1,7 @@
 import CafeDashboard from "../components/practices/cafeDashboard/CafeDashboard";
 import CafeMenu from "../components/practices/cafeMenu/CafeMenu";
 import ShoppingCart from "../components/practices/shoppingCart/ShoppingCart";
-import Todo from "../components/practices/todo/Todo";
+import Todos from "../components/practices/todos/Todos";
 
 export const initialPractices = [
   {
@@ -33,7 +33,7 @@ export const initialPractices = [
     title: "لیست کار ها",
     description: "یک لیست کار های ساده",
     difficulty: "hard",
-    jsxElement: <Todo />,
-    jsxString: Todo,
+    jsxElement: <Todos />,
+    jsxString: Todos,
   },
 ];

@@ -1,38 +1,14 @@
-import { useState } from "react";
-import Button from "./Button";
+import { useTheme } from "../../utils/ThemeContext";
 import DarkModeIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeIcon from "@mui/icons-material/LightModeRounded";
+import Button from "./Button";
 
 export default function ThemeToggle() {
-  const [lightThemeStatus, setLightThemeStatus] = useState(() => {
-    return localStorage.getItem("theme") === "light";
-  });
-
-  const root = document.documentElement;
-
-  const toggleTheme = () => {
-    const nextIsLight = !lightThemeStatus;
-
-    setLightThemeStatus(nextIsLight);
-
-    root.classList.add("disable-transitions");
-
-    if (nextIsLight) {
-      root.classList.add("light");
-      localStorage.setItem("theme", "light");
-    } else {
-      root.classList.remove("light");
-      localStorage.setItem("theme", "dark");
-    }
-
-    requestAnimationFrame(() => {
-      root.classList.remove("disable-transitions");
-    });
-  };
+  const { isLight, toggleTheme } = useTheme();
 
   return (
     <Button onClick={toggleTheme} hover={false}>
-      {lightThemeStatus ? (
+      {isLight ? (
         <DarkModeIcon
           sx={{
             transition: "transform 0.3s ease-in-out",

@@ -1,22 +1,17 @@
-import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { localGet, localSet } from "./localStorage.js";
-import TodoList from "./TodoList.jsx";
+import { useReducer, useState } from "react";
 import { twMerge } from "tailwind-merge";
+import { v4 as uuidv4 } from "uuid";
+import { localGet } from "./utils/localStorage";
+import TodoList from "./TodoList.jsx";
+import todosReducer from "./utils/todosReducer";
 
-export default function Todo() {
-  const [todos, setTodos] = useState(() => localGet("todoList") || []);
+const initialTodos = localGet("todoList") || [];
+
+export default function Todos() {
+  const [todos, todosDispatch] = useReducer(todosReducer, initialTodos);
   const [newTodoInputValue, setNewTodoInputValue] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const newTodoGenerator = () => {
-    return {
-      id: uuidv4(),
-      status: false,
-      title: newTodoInputValue.trim(),
-      createdAt: new Date().toLocaleString(),
-    };
-  };
   const filteredTodos = todos.filter((todo) => {
     const title = todo.title.toLowerCase();
     const query = searchQuery.toLowerCase();
@@ -35,57 +30,61 @@ export default function Todo() {
     if (e.key !== "Enter" || e.shiftKey) return;
     e.preventDefault();
     if (!newTodoInputValue.trim()) return;
-    const newTodo = newTodoGenerator();
-    const newTodosList = [...todos, newTodo];
 
-    setTodos(newTodosList);
-    localSet("todoList", newTodosList);
+    todosDispatch({
+      type: "added",
+      id: uuidv4(),
+      status: false,
+      title: newTodoInputValue.trim(),
+      createdAt: new Date().toLocaleString(),
+    });
+
     setNewTodoInputValue("");
-    console.log(newTodosList);
   };
 
-  const editTodoTitleHandler = (todoId, newTitleValue) => {
-    const updatedTodos = todos.map((todoItem) =>
-      todoItem.id === todoId
-        ? {
-            ...todoItem,
-            title: newTitleValue,
-            createdAt: new Date().toLocaleString(),
-          }
-        : todoItem,
-    );
-    setTodos(updatedTodos);
-    localSet("todoList", updatedTodos);
-  };
+  // const editTodoTitleHandler = (todoId, newTitleValue) => {
+  //   const updatedTodos = todos.map((todoItem) =>
+  //     todoItem.id === todoId
+  //       ? {
+  //           ...todoItem,
+  //           title: newTitleValue,
+  //           createdAt: new Date().toLocaleString(),
+  //         }
+  //       : todoItem,
+  //   );
+  //   setTodos(updatedTodos);
+  //   localSet("todoList", updatedTodos);
+  // };
 
   const deleteTodoHandler = (todoId) => {
-    // const updatedTodos = todos.flatMap((todoItem) => {
-    //   if (todoItem.id === todoId) todoItem = []; // If id matched that todo will be removed from updatedTodos);
-    //   return todoItem;
-    // });
-    const updatedTodos = todos.filter((todoItem) => todoItem.id !== todoId);
-    setTodos(updatedTodos);
-    localSet("todoList", updatedTodos);
+    todosDispatch({
+      type: "deleted",
+      id: todoId,
+    });
   };
 
   const clearAllTodoHandler = () => {
-    setTodos([]);
+    console.log("sdad");
+
+    todosDispatch({
+      type: "cleared",
+    });
+
     setSearchQuery("");
-    localSet("todoList", []);
   };
 
-  const statusToggleHandler = (todoId) => {
-    const upadtedTodos = todos.map((todoItem) =>
-      todoItem.id === todoId
-        ? { ...todoItem, status: !todoItem.status }
-        : todoItem,
-    );
-    setTodos(upadtedTodos);
-    localSet("todoList", upadtedTodos);
-  };
+  // const statusToggleHandler = (todoId) => {
+  //   const upadtedTodos = todos.map((todoItem) =>
+  //     todoItem.id === todoId
+  //       ? { ...todoItem, status: !todoItem.status }
+  //       : todoItem,
+  //   );
+  //   setTodos(upadtedTodos);
+  //   localSet("todoList", upadtedTodos);
+  // };
 
   return (
-    <div className="border-border w-full border-b-2 py-5">
+    <div className="border-border w-full py-5">
       <div
         className={twMerge(
           "flex-center shadow-base mx-auto w-1/2 flex-col rounded-md py-6", // 1. Base & Layout Style
@@ -110,7 +109,7 @@ export default function Todo() {
           id="todo-search"
           type="text"
           placeholder="Search in Your Todos"
-          className={`border-border w-full border-y py-3 text-center ${todos.length <= 0 ? "hidden" : ""}`}
+          className={`border-border w-full rounded-none border-x-0 border-y py-3 text-center shadow-none ${todos.length <= 0 ? "hidden" : ""} hover:shadow-none`}
           value={searchQuery}
           onChange={searchTodoInputHandler}
         />
@@ -118,8 +117,8 @@ export default function Todo() {
         {filteredTodos.length > 0 ? (
           <TodoList
             todos={filteredTodos}
-            statusToggle={statusToggleHandler}
-            editTodoTitle={editTodoTitleHandler}
+            // statusToggle={statusToggleHandler}
+            // editTodoTitle={editTodoTitleHandler}
             deleteTodo={deleteTodoHandler}
             clearAllTodo={clearAllTodoHandler}
           />

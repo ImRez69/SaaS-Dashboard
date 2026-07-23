@@ -1,5 +1,5 @@
 import TodoItems from "./TodoItems";
-import Button from "./Button";
+import Button from "../../ui/Button";
 
 export default function TodoList({
   todos,
@@ -23,7 +23,7 @@ export default function TodoList({
       })}
 
       <Button
-        style={`border-border mt-4 gap-2 flex-center bg-transparent shadow-none hover:shadow-none ${todos.length > 0 ? "" : "hidden"}`}
+        style={`border-border mt-4 gap-2 flex-center  ${todos.length > 0 ? "" : "hidden"}`}
         onClickFunc={clearAllTodo}
       >
         Clear All
