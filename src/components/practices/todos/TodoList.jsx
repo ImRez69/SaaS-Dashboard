@@ -3,10 +3,10 @@ import Button from "../../ui/Button";
 
 export default function TodoList({
   todos,
-  statusToggle,
-  editTodoTitle,
-  deleteTodo,
-  clearAllTodo,
+  onStatusToggle,
+  onChangeTodo,
+  onDeleteTodo,
+  onClearAllTodo,
 }) {
   return (
     <ul className="divide-border flex-center w-full flex-wrap divide-y-2 divide-dashed">
@@ -15,16 +15,16 @@ export default function TodoList({
           <TodoItems
             todo={todo}
             key={todo?.id}
-            statusToggle={statusToggle}
-            editTodoTitle={editTodoTitle}
-            deleteTodo={deleteTodo}
+            statusToggle={onStatusToggle}
+            changeTodoTitle={onChangeTodo}
+            deleteTodo={onDeleteTodo}
           />
         );
       })}
 
       <Button
         style={`border-border mt-4 gap-2 flex-center  ${todos.length > 0 ? "" : "hidden"}`}
-        onClickFunc={clearAllTodo}
+        onClick={onClearAllTodo}
       >
         Clear All
       </Button>

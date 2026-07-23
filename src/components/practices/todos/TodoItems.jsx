@@ -9,7 +9,7 @@ export default function TodoItems({
   todo,
   statusToggle,
   deleteTodo,
-  editTodoTitle,
+  changeTodoTitle,
 }) {
   const [editMode, setEditMode] = useState(false);
   const [editInputValue, setEditInputValue] = useState(todo?.title);
@@ -18,7 +18,7 @@ export default function TodoItems({
     e.preventDefault();
     if (!e.target.value.trim()) return;
     setEditMode(false);
-    editTodoTitle(todo?.id, editInputValue);
+    changeTodoTitle(todo?.id, editInputValue);
   };
 
   return (
@@ -42,7 +42,7 @@ export default function TodoItems({
               confirmHandler={() => {
                 if (!editInputValue.trim()) return;
                 setEditMode(false);
-                editTodoTitle(todo?.id, editInputValue);
+                changeTodoTitle(todo?.id, editInputValue);
               }}
             />
             <CancelIcon
@@ -94,7 +94,7 @@ export default function TodoItems({
             <DeleteIcon deleteHandler={() => deleteTodo(todo?.id)} />
           </div>
 
-          <span className="text-md absolute top-3 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-10">
+          <span className="text-md absolute top-3 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50">
             {todo.createdAt}
           </span>
         </div>

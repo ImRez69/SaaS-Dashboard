@@ -1,5 +1,3 @@
-import { localSet } from "./localStorage";
-
 export default function todosReducer(todos, action) {
   switch (action.type) {
     case "added": {
@@ -11,74 +9,52 @@ export default function todosReducer(todos, action) {
       };
       const updatedTodos = [...todos, newTodo];
 
-      localSet("todoList", updatedTodos);
+      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
 
-    case "changed": {
-      return;
+    case "titleChanged": {
+      const updatedTodos = todos.map((todoItem) =>
+        todoItem.id === action.id
+          ? {
+              ...todoItem,
+              title: action.title,
+              createdAt: new Date().toLocaleString(),
+              status: action.status || todoItem.status,
+            }
+          : todoItem,
+      );
+
+      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
+      return updatedTodos;
+    }
+
+    case "statusToggled": {
+      const updatedTodos = todos.map((todoItem) =>
+        todoItem.id === action.id
+          ? {
+              ...todoItem,
+              status: !todoItem.status,
+            }
+          : todoItem,
+      );
+
+      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
+      return updatedTodos;
     }
 
     case "deleted": {
       const updatedTodos = todos.filter((todo) => todo.id !== action.id);
-      localSet("todoList", updatedTodos);
+
+      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
 
     case "cleared": {
       const updatedTodos = [];
-      localSet("todoList", updatedTodos);
-    //   console.log(updatedTodos);
+
+      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
   }
 }
-
-// const newTodoHandler = (e) => {
-//   if (e.key !== "Enter" || e.shiftKey) return;
-//   e.preventDefault();
-//   if (!newTodoInputValue.trim()) return;
-//   const newTodo = newTodoGenerator();
-//   const newTodosList = [...todos, newTodo];
-
-//   setTodos(newTodosList);
-//   localSet("todoList", newTodosList);
-//   setNewTodoInputValue("");
-//   console.log(newTodosList);
-// };
-
-// const editTodoTitleHandler = (todoId, newTitleValue) => {
-//   const updatedTodos = todos.map((todoItem) =>
-//     todoItem.id === todoId
-//       ? {
-//           ...todoItem,
-//           title: newTitleValue,
-//           createdAt: new Date().toLocaleString(),
-//         }
-//       : todoItem,
-//   );
-//   setTodos(updatedTodos);
-//   localSet("todoList", updatedTodos);
-// };
-
-// const statusToggleHandler = (todoId) => {
-//   const upadtedTodos = todos.map((todoItem) =>
-//     todoItem.id === todoId
-//       ? { ...todoItem, status: !todoItem.status }
-//       : todoItem,
-//   );
-//   setTodos(upadtedTodos);
-//   localSet("todoList", upadtedTodos);
-// };
-
-// const deleteTodoHandler = (todoId) => {
-//   const updatedTodos = todos.filter((todoItem) => todoItem.id !== todoId);
-//   setTodos(updatedTodos);
-//   localSet("todoList", updatedTodos);
-// };
-
-// const clearAllTodoHandler = () => {
-//   setTodos([]);
-//   setSearchQuery("");
-//   localSet("todoList", []);
-// };

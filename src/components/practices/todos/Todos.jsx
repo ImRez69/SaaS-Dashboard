@@ -1,14 +1,17 @@
 import { useReducer, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { v4 as uuidv4 } from "uuid";
-import { localGet } from "./utils/localStorage";
 import TodoList from "./TodoList.jsx";
 import todosReducer from "./utils/todosReducer";
 
-const initialTodos = localGet("todoList") || [];
+const init = (initialTodos) => {
+  const savedTodos = JSON.parse(localStorage.getItem("todoList"));
+  return savedTodos ? savedTodos : initialTodos;
+};
 
 export default function Todos() {
-  const [todos, todosDispatch] = useReducer(todosReducer, initialTodos);
+  const [todos, todosDispatch] = useReducer(todosReducer, [], init);
+
   const [newTodoInputValue, setNewTodoInputValue] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -18,7 +21,9 @@ export default function Todos() {
     return title.includes(query);
   });
 
-  const onNewTodoInputChangeHandler = (e) => {
+  console.log("filteredTodos: ", filteredTodos);
+
+  const handleNewTodoInputChange = (e) => {
     setNewTodoInputValue(e.target.value);
   };
 
@@ -26,7 +31,7 @@ export default function Todos() {
     setSearchQuery(e.target.value);
   };
 
-  const newTodoHandler = (e) => {
+  const handleAddTodo = (e) => {
     if (e.key !== "Enter" || e.shiftKey) return;
     e.preventDefault();
     if (!newTodoInputValue.trim()) return;
@@ -42,30 +47,14 @@ export default function Todos() {
     setNewTodoInputValue("");
   };
 
-  // const editTodoTitleHandler = (todoId, newTitleValue) => {
-  //   const updatedTodos = todos.map((todoItem) =>
-  //     todoItem.id === todoId
-  //       ? {
-  //           ...todoItem,
-  //           title: newTitleValue,
-  //           createdAt: new Date().toLocaleString(),
-  //         }
-  //       : todoItem,
-  //   );
-  //   setTodos(updatedTodos);
-  //   localSet("todoList", updatedTodos);
-  // };
-
-  const deleteTodoHandler = (todoId) => {
+  const handleDeleteTodo = (todoId) => {
     todosDispatch({
       type: "deleted",
       id: todoId,
     });
   };
 
-  const clearAllTodoHandler = () => {
-    console.log("sdad");
-
+  const handleClearAllTodo = () => {
     todosDispatch({
       type: "cleared",
     });
@@ -73,15 +62,20 @@ export default function Todos() {
     setSearchQuery("");
   };
 
-  // const statusToggleHandler = (todoId) => {
-  //   const upadtedTodos = todos.map((todoItem) =>
-  //     todoItem.id === todoId
-  //       ? { ...todoItem, status: !todoItem.status }
-  //       : todoItem,
-  //   );
-  //   setTodos(upadtedTodos);
-  //   localSet("todoList", upadtedTodos);
-  // };
+  const handleChangeTodo = (todoId, newTitleValue) => {
+    todosDispatch({
+      type: "titleChanged",
+      id: todoId,
+      title: newTitleValue,
+    });
+  };
+
+  const handleStatusToggle = (todoId) => {
+    todosDispatch({
+      type: "statusToggled",
+      id: todoId,
+    });
+  };
 
   return (
     <div className="border-border w-full py-5">
@@ -95,16 +89,19 @@ export default function Todos() {
           // [conditional && "style", conditional ? "if-true-style" : "if-false-style"], // 6. Conditional Styles
         )}
       >
-        <h3 className="mt-0 font-bold">TO DO APP</h3>
+        <h3 className="word-spacing-hover-anime mt-0 mb-4 font-bold">
+          TO DO APP
+        </h3>
 
         <textarea
           type="text"
           placeholder={`What needs to be done today?\n[Enter for add | Shift+Enter for next line]\nHeight of field automatic change`}
           className="border-border mb-4 field-sizing-content min-h-28 w-7/8 rounded-xl border p-4"
           value={newTodoInputValue}
-          onChange={onNewTodoInputChangeHandler}
-          onKeyDown={newTodoHandler}
+          onChange={handleNewTodoInputChange}
+          onKeyDown={handleAddTodo}
         ></textarea>
+
         <input
           id="todo-search"
           type="text"
@@ -117,10 +114,10 @@ export default function Todos() {
         {filteredTodos.length > 0 ? (
           <TodoList
             todos={filteredTodos}
-            // statusToggle={statusToggleHandler}
-            // editTodoTitle={editTodoTitleHandler}
-            deleteTodo={deleteTodoHandler}
-            clearAllTodo={clearAllTodoHandler}
+            onStatusToggle={handleStatusToggle}
+            onChangeTodo={handleChangeTodo}
+            onDeleteTodo={handleDeleteTodo}
+            onClearAllTodo={handleClearAllTodo}
           />
         ) : (
           <p className="word-spacing-hover-anime text-foreground/50">
