@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { TodosContex, TodosDispatchContex } from "./TodosContext";
+import { TodosContext, TodosDispatchContext } from "./TodosContext";
 import todosReducer from "./todosReducer";
 
 const todosInit = (initialTodos) => {
@@ -11,10 +11,10 @@ export default function TodosProvider({ children }) {
   const [todos, todosDispatch] = useReducer(todosReducer, [], todosInit);
 
   return (
-    <TodosContex value={todos}>
-      <TodosDispatchContex value={todosDispatch}>
+    <TodosContext value={todos}>
+      <TodosDispatchContext value={todosDispatch}>
         {children}
-      </TodosDispatchContex>
-    </TodosContex>
+      </TodosDispatchContext>
+    </TodosContext>
   );
 }

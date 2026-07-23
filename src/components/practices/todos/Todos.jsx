@@ -71,10 +71,10 @@ export default function Todos() {
   };
 
   return (
-    <div className="border-border w-full py-5">
+    <div className="border-border w-full py-5" dir="rtl">
       <div
         className={twMerge(
-          "flex-center shadow-base mx-auto w-1/2 flex-col rounded-md py-6", // 1. Base & Layout Style
+          "flex-center shadow-base mx-auto w-5/6 flex-col rounded-md py-6", // 1. Base & Layout Style
           "border-border border", // 2. Color, Border & Appearance
           "max-md:w-full max-md:rounded-none max-md:border-x-0", // 3. Responsive & Dark Mode Style
           "", // 4. Interaction Style
@@ -83,12 +83,12 @@ export default function Todos() {
         )}
       >
         <h3 className="word-spacing-hover-anime mt-0 mb-4 font-bold">
-          TO DO APP
+          لیست کار ها
         </h3>
 
         <textarea
           type="text"
-          placeholder={`What needs to be done today?\n[Enter for add | Shift+Enter for next line]\nHeight of field automatic change`}
+          placeholder={`امروز میخوای چیکار کنید؟\n[Enter را برای اضافه کردن و Shift+Enter را برای رفتن به خط بعد فشار دهید] \nارتفاع فیلد بصورت خودکار افزایش پیدا میکند`}
           className="border-border mb-4 field-sizing-content min-h-28 w-7/8 rounded-xl border p-4"
           value={newTodoInputValue}
           onChange={handleNewTodoInputChange}
@@ -98,8 +98,8 @@ export default function Todos() {
         <input
           id="todo-search"
           type="text"
-          placeholder="Search in Your Todos"
-          className={`border-border w-full rounded-none border-x-0 border-y py-3 text-center shadow-none ${todos.length <= 0 ? "hidden" : ""} hover:shadow-none`}
+          placeholder="جستجو در لیست کار ها"
+          className={`border-border w-full rounded-none border-x-0 border-y py-3 mb-5 text-center shadow-none ${todos.length <= 0 ? "hidden" : ""} hover:shadow-none`}
           value={searchQuery}
           onChange={searchTodoInputHandler}
         />
@@ -114,7 +114,7 @@ export default function Todos() {
           />
         ) : (
           <p className="word-spacing-hover-anime text-foreground/50">
-            Items Not Found
+            آیتمی پیدا نشد!
           </p>
         )}
       </div>

@@ -26,7 +26,7 @@ export default function TodoList({
         style={`border-border mt-4 gap-2 flex-center  ${todos.length > 0 ? "" : "hidden"}`}
         onClick={onClearAllTodo}
       >
-        Clear All
+        حذف همه
       </Button>
     </ul>
   );

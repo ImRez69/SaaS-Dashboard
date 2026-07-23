@@ -69,7 +69,7 @@ export default function TodoItems({
               type="checkbox"
               checked={todo?.status}
               onChange={() => statusToggle(todo?.id)}
-              className="accent-accent mr-2 min-h-4.5 min-w-4.5 cursor-pointer"
+              className="accent-accent ml-2 min-h-4.5 min-w-4.5 cursor-pointer"
             />
             <p
               className={twMerge(
@@ -94,7 +94,7 @@ export default function TodoItems({
             <DeleteIcon deleteHandler={() => deleteTodo(todo?.id)} />
           </div>
 
-          <span className="text-md absolute top-3 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50">
+          <span className="text-md absolute top-4 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50">
             {todo.createdAt}
           </span>
         </div>

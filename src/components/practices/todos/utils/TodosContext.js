@@ -1,11 +1,11 @@
 import { createContext, useContext } from "react";
 
-export const TodosContex = createContext(null);
-export const TodosDispatchContex = createContext(null);
+export const TodosContext = createContext(null);
+export const TodosDispatchContext = createContext(null);
 
 export function useTodos() {
-  return useContext(TodosContex);
+  return useContext(TodosContext);
 }
 export function useTodosDispatch() {
-  return useContext(TodosDispatchContex);
+  return useContext(TodosDispatchContext);
 }
