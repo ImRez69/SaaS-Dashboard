@@ -74,7 +74,7 @@ export default function Todos() {
     <div className="border-border w-full py-5" dir="rtl">
       <div
         className={twMerge(
-          "flex-center shadow-base mx-auto w-5/6 flex-col rounded-md py-6", // 1. Base & Layout Style
+          "flex-center shadow-base mx-auto w-5/6 flex-col rounded-md py-6 bg-surface", // 1. Base & Layout Style
           "border-border border", // 2. Color, Border & Appearance
           "max-md:w-full max-md:rounded-none max-md:border-x-0", // 3. Responsive & Dark Mode Style
           "", // 4. Interaction Style
