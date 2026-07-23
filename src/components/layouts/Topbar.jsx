@@ -12,8 +12,8 @@ export default function Topbar({ activeId }) {
     <header className="bg-surface border-border sticky top-0 z-10 flex h-16 items-center justify-between border-b px-6">
       <div className="flex items-center gap-5">
         <Search />
-        <span className="opacity-50">
-          تعداد کار ها: <strong> {activeTodos.length}</strong>
+        <span className="absolute right-60 opacity-50">
+          تعداد کارها باقیمانده: <strong> {activeTodos.length}</strong>
         </span>
       </div>
 

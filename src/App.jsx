@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ThemeProvider from "./utils/ThemeProvider.jsx";
+import ThemeProvider from "./utils/ThemeProvider";
 import MainLayout from "./components/layouts/MainLayout";
 import { sidebarListItems } from "./data/SidebarData";
 import "./App.css";
