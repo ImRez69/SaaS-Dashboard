@@ -20,7 +20,6 @@ export default function todosReducer(todos, action) {
               ...todoItem,
               title: action.title,
               createdAt: new Date().toLocaleString(),
-              status: action.status || todoItem.status,
             }
           : todoItem,
       );

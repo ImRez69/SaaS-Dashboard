@@ -4,14 +4,13 @@ import { v4 as uuidv4 } from "uuid";
 import TodoList from "./TodoList.jsx";
 import todosReducer from "./utils/todosReducer";
 
-const init = (initialTodos) => {
+const todosInit = (initialTodos) => {
   const savedTodos = JSON.parse(localStorage.getItem("todoList"));
   return savedTodos ? savedTodos : initialTodos;
 };
 
 export default function Todos() {
-  const [todos, todosDispatch] = useReducer(todosReducer, [], init);
-
+  const [todos, todosDispatch] = useReducer(todosReducer, [], todosInit);
   const [newTodoInputValue, setNewTodoInputValue] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -20,8 +19,6 @@ export default function Todos() {
     const query = searchQuery.toLowerCase();
     return title.includes(query);
   });
-
-  console.log("filteredTodos: ", filteredTodos);
 
   const handleNewTodoInputChange = (e) => {
     setNewTodoInputValue(e.target.value);
