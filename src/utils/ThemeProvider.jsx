@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ThemeContext } from "./ThemeContext";
+import { ThemeContext } from "./ThemeContext.js";
 
 export default function ThemeProvider({ children }) {
   const [isLight, setIslight] = useState(() => {

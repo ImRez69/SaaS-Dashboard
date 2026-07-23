@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ThemeProvider from "./utils/ThemeProvider.jsx";
 import MainLayout from "./components/layouts/MainLayout";
 import { sidebarListItems } from "./data/SidebarData";
 import "./App.css";
@@ -14,11 +15,11 @@ function App() {
   };
 
   return (
-    <>
+    <ThemeProvider>
       <MainLayout activeId={activeId} onSetStatus={statusHandle}>
         {sidebarListItems.find((list) => list.id === activeId).page}
       </MainLayout>
-    </>
+    </ThemeProvider>
   );
 }
 

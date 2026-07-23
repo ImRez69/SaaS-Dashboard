@@ -1,19 +1,15 @@
-import { useReducer, useState } from "react";
+import { useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { v4 as uuidv4 } from "uuid";
+import { useTodos, useTodosDispatch } from "./utils/TodosContext.js";
 import TodoList from "./TodoList.jsx";
-import todosReducer from "./utils/todosReducer";
-
-const todosInit = (initialTodos) => {
-  const savedTodos = JSON.parse(localStorage.getItem("todoList"));
-  return savedTodos ? savedTodos : initialTodos;
-};
 
 export default function Todos() {
-  const [todos, todosDispatch] = useReducer(todosReducer, [], todosInit);
   const [newTodoInputValue, setNewTodoInputValue] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
+  const todos = useTodos();
+  const todosDispatch = useTodosDispatch();
   const filteredTodos = todos.filter((todo) => {
     const title = todo.title.toLowerCase();
     const query = searchQuery.toLowerCase();

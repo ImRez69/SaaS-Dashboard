@@ -1,10 +1,10 @@
+import TodosProvider from "../practices/todos/utils/TodosProvider";
 import Sidebar from "./Sidebar";
 import Topbar from "./Topbar";
-import ThemeProvider from "../../utils/ThemeProvider";
 
 export default function MainLayout({ children, activeId, onSetStatus }) {
   return (
-    <ThemeProvider>
+    <TodosProvider>
       <div className="bg-background text-foreground flex min-h-screen justify-between">
         <Sidebar activeId={activeId} onSetStatus={onSetStatus} />
         <div className="flex flex-1 flex-col">
@@ -12,6 +12,6 @@ export default function MainLayout({ children, activeId, onSetStatus }) {
           <main className="flex-1 p-6">{children}</main>
         </div>
       </div>
-    </ThemeProvider>
+    </TodosProvider>
   );
 }
