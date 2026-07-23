@@ -8,7 +8,7 @@ import SidebarIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import Button from "../ui/Button";
 export default function Sidebar({ activeId, onSetStatus }) {
   const [isOpen, setIsOpen] = useState(
-    () => JSON.parse(localStorage.getItem("sideBarIsOpen")) || true,
+    () => JSON.parse(localStorage.getItem("sideBarIsOpen")) && true,
   );
 
   return (
