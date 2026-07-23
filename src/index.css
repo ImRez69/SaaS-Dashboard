@@ -45,6 +45,9 @@
   --animate-backdrop-in: backdrop-in 0.25s ease-out forwards;
   --animate-backdrop-out: backdrop-out 0.2s ease-in forwards;
 
+  --animate-sidebar-open: sidebar-open 0.2s ease-out forwards;
+  --animate-sidebar-close: sidebar-close 0.2s ease-in forwards;
+
   @keyframes arrow {
     0%,
     100% {
@@ -92,6 +95,24 @@
     }
     100% {
       opacity: 0;
+    }
+  }
+
+  @keyframes sidebar-open {
+    0% {
+      width: 3rem;
+    }
+    100% {
+      width: 16rem;
+    }
+  }
+
+  @keyframes sidebar-close {
+    0% {
+      width: 16rem;
+    }
+    100% {
+      width: 3rem;
     }
   }
 }
@@ -146,7 +167,6 @@
     --sh-accent-hover: 0 0 18px rgba(29, 78, 216, 0.3);
     color-scheme: light;
   }
-
 
   ::selection {
     @apply bg-muted/20;
