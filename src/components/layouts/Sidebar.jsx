@@ -18,19 +18,11 @@ export default function Sidebar({ activeId, onSetStatus }) {
         isOpen || "w-12",
       )}
     >
-      <div
-        className={twMerge(
-          "border-border flex h-16 items-center border-b px-2",
-          isOpen || "",
-        )}
-      >
+      <div className="border-border flex h-16 items-center border-b px-2">
         <img
           src={Logo}
           alt={"SaaS Logo"}
-          className={twMerge(
-            "w-7 cursor-pointer transition-[opacity,rotate,width] hover:rotate-45 hover:opacity-60",
-            isOpen || "",
-          )}
+          className="w-7 cursor-pointer transition-[opacity,rotate,width] hover:rotate-45 hover:opacity-60"
         />
 
         <h4
@@ -76,7 +68,7 @@ export default function Sidebar({ activeId, onSetStatus }) {
           />
         </div>
 
-        <div className={twMerge("flex gap-2")}>
+        <div className="flex gap-2">
           <div className={twMerge(isOpen || "hidden")}>
             <ThemeToggle />
           </div>
@@ -126,6 +118,7 @@ function ListItem({ item, status, onSetStatus, isOpen }) {
       >
         {item.icon}
       </span>
+
       <span
         className={twMerge(
           "opcaity-1 transition-opacity",
