@@ -23,8 +23,8 @@ export default function UsersManagement() {
         مدیریت کارمندان
       </h1>
 
-      <div className="flex w-full justify-center gap-4">
-        <div className="w-1/4">
+      <div className="flex w-full justify-center gap-4 max-md:flex-wrap">
+        <div className="w-1/4 max-md:w-full">
           <MinStatCard title={"کل کاربران"} value={usersDetails.allUser.length}>
             <p>
               <strong className="text-green-500">12%+ </strong>
@@ -33,7 +33,7 @@ export default function UsersManagement() {
           </MinStatCard>
         </div>
 
-        <div className="w-1/4">
+        <div className="w-1/4 max-md:w-full">
           <MinStatCard
             title={"کاربران فعال"}
             value={usersDetails.activeUser.length}
@@ -45,7 +45,7 @@ export default function UsersManagement() {
           </MinStatCard>
         </div>
 
-        <div className="w-1/4">
+        <div className="w-1/4 max-md:w-full">
           <MinStatCard
             title={"کاربران غیر فعال"}
             value={usersDetails.inactiveUser.length}
@@ -57,7 +57,7 @@ export default function UsersManagement() {
           </MinStatCard>
         </div>
 
-        <div className="w-1/4">
+        <div className="w-1/4 max-md:w-full">
           <MinStatCard
             title={"کاربران در انتظار"}
             value={usersDetails.pendingUser.length}
@@ -114,7 +114,7 @@ function UsersTable({ users }) {
     return matchName && matchEmail && matchRole;
   });
 
-  function changeHanlde(e) {
+  function changeHandle(e) {
     setInputValues((prevValues) => {
       return { ...prevValues, [e.target.name]: e.target.value };
     });
@@ -126,43 +126,52 @@ function UsersTable({ users }) {
 
   return (
     <div className="flex w-full flex-wrap items-center gap-4">
-      <div className="flex w-full justify-between gap-4">
-        <div className="flex flex-1 justify-between gap-4">
-          <input
-            type="text"
-            name="name"
-            className="w-1/2"
-            placeholder="جستجو نام"
-            value={inputValues.name}
-            onChange={changeHanlde}
-          />
-          <input
-            type="text"
-            name="email"
-            className="w-1/2"
-            placeholder="جستجو ایمیل"
-            value={inputValues.email}
-            onChange={changeHanlde}
-          />
-        </div>
+      <Searchbar
+        inputValues={inputValues}
+        onChange={changeHandle}
+        onClear={clearHandle}
+      />
+      <Table columns={columns} items={filteredItems} />
+    </div>
+  );
+}
 
-        <select
-          name="role"
-          className=""
-          value={inputValues.role}
-          onChange={changeHanlde}
-        >
-          <option value="همه نقش ها">همه نقش ها</option>
-          <option value="مدیر سیستم">مدیر سیستم</option>
-          <option value="برنامه‌نویس">برنامه‌نویس</option>
-          <option value="طراح UI/UX">طراح UI/UX</option>
-          <option value="پشتیبان">پشتیبان</option>
-        </select>
-
-        <Button onClick={clearHandle}>پاک کردن</Button>
+function Searchbar({ inputValues, onChange, onClear }) {
+  return (
+    <div className="flex w-full justify-between gap-4 max-md:flex-wrap">
+      <div className="flex w-full flex-1 justify-between gap-4 max-md:flex-none">
+        <input
+          type="text"
+          name="name"
+          className="w-1/2"
+          placeholder="جستجو نام"
+          value={inputValues.name}
+          onChange={onChange}
+        />
+        <input
+          type="text"
+          name="email"
+          className="w-1/2"
+          placeholder="جستجو ایمیل"
+          value={inputValues.email}
+          onChange={onChange}
+        />
       </div>
 
-      <Table columns={columns} items={filteredItems} />
+      <select
+        name="role"
+        className="max-md:flex-1"
+        value={inputValues.role}
+        onChange={onChange}
+      >
+        <option value="همه نقش ها">همه نقش ها</option>
+        <option value="مدیر سیستم">مدیر سیستم</option>
+        <option value="برنامه‌نویس">برنامه‌نویس</option>
+        <option value="طراح UI/UX">طراح UI/UX</option>
+        <option value="پشتیبان">پشتیبان</option>
+      </select>
+
+      <Button onClick={onClear}>پاک کردن</Button>
     </div>
   );
 }

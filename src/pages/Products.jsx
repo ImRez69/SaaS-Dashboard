@@ -154,14 +154,14 @@ function ProductsSection({ activeTabId, products }) {
   const [inputValues, setInputValues] = useState({
     name: "",
     category: "",
-    status: "همه وضعیت ها",
+    status: "all",
   });
 
   const filteredItems = products.filter((product) => {
     const matchName = product.name.includes(inputValues.name);
     const matchCategory = product.category.includes(inputValues.category);
     const matchStatus =
-      inputValues.status === "همه وضعیت ها" ||
+      inputValues.status === "all" ||
       product.status.includes(inputValues.status);
     return matchName && matchCategory && matchStatus;
   });
@@ -241,10 +241,10 @@ function Searchbar({ inputValues, onChange, onClear }) {
         value={inputValues.status}
         onChange={onChange}
       >
-        <option value="همه وضعیت ها">همه وضعیت ها</option>
-        <option value="در دسترس">در دسترس</option>
-        <option value="در حال اتمام">در حال اتمام</option>
-        <option value="ناموجود">ناموجود</option>
+        <option value="all">همه وضعیت ها</option>
+        <option value="available">در دسترس</option>
+        <option value="low_stock">در حال اتمام</option>
+        <option value="out_of_stock">ناموجود</option>
       </select>
 
       <Button onClick={onClear}>پاک کردن</Button>
