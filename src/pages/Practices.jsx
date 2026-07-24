@@ -41,8 +41,8 @@ export default function Practices() {
     <div className="flex flex-col items-center gap-6">
       <h1 className="text-foreground w-full text-2xl font-bold">تمرین ها</h1>
       <div className="flex w-full flex-col justify-center gap-4">
-        <div className="flex w-full justify-center gap-4">
-          <div className="w-1/4">
+        <div className="flex w-full justify-center gap-4 max-md:flex-wrap">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"کل تمرین ها"}
               value={practicesDetails.allPractices.length}
@@ -54,7 +54,7 @@ export default function Practices() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"تمرین های ساده "}
               value={practicesDetails.easyPractices.length}
@@ -66,7 +66,7 @@ export default function Practices() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"تمرین های متوسط"}
               value={practicesDetails.normalPractices.length}
@@ -78,7 +78,7 @@ export default function Practices() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"تمرین های سخت"}
               value={practicesDetails.hardPractices.length}
@@ -92,7 +92,7 @@ export default function Practices() {
         </div>
       </div>
 
-      <div className="grid w-full grid-cols-4 grid-rows-2 gap-4">
+      <div className="grid w-full grid-cols-4 grid-rows-2 gap-4 max-md:grid-cols-1">
         {practices.map((practice) => (
           <Practice
             key={practice.id}
@@ -132,18 +132,19 @@ function Practice({ practice, onOpenComponent, onOpenCode }) {
         </h3>
         <Badge status={practice.difficulty} />
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between max-xl:flex-wrap max-xl:gap-4 max-md:flex-wrap max-md:gap-4">
         <Button
-          style={"bg-accent-bg"}
+          style={"bg-accent-bg max-md:mx-auto max-xl:mx-auto"}
           onClick={() => onOpenComponent(practice.jsxElement)}
         >
           باز کردن {practice.title}
+          <span className="text-xs"> (فقط در دسکتاپ)</span>
         </Button>
         <Button
-          style={"bg-accent-bg"}
+          style={"bg-accent-bg max-md:mx-auto max-xl:mx-auto"}
           onClick={() => onOpenCode(practice.jsxString)}
         >
-          دیدن کامپوننت <span className="text-xs">(کامپایل‌شده)</span>
+          دیدن کامپوننت<span className="text-xs"> (کامپایل‌شده)</span>
         </Button>
       </div>
     </div>
