@@ -99,7 +99,7 @@ export default function Todos() {
           id="todo-search"
           type="text"
           placeholder="جستجو در لیست کار ها"
-          className={`border-border w-full rounded-none border-x-0 border-y py-3 mb-5 text-center shadow-none ${todos.length <= 0 ? "hidden" : ""} hover:shadow-none`}
+          className={`border-border w-full rounded-none border-x-0 border-y py-3 text-center shadow-none ${todos.length <= 0 ? "hidden" : ""} hover:shadow-none`}
           value={searchQuery}
           onChange={searchTodoInputHandler}
         />
@@ -113,7 +113,7 @@ export default function Todos() {
             onClearAllTodo={handleClearAllTodo}
           />
         ) : (
-          <p className="word-spacing-hover-anime text-foreground/50">
+          <p className="word-spacing-hover-anime text-foreground/50 mt-3">
             آیتمی پیدا نشد!
           </p>
         )}
