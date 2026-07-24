@@ -287,7 +287,7 @@ function ProductsTable({ status, products }) {
 function ProductsList({ status, products }) {
   return (
     <div
-      className={`grid grid-cols-4 gap-4 ${status ? "" : "hidden"} max-md:grid-cols-1`}
+      className={`grid grid-cols-4 gap-4 ${status ? "" : "hidden"} max-md:grid-cols-1 max-xl:grid-cols-3`}
     >
       {products.map((product) => (
         <Product key={product.id} product={product} />
