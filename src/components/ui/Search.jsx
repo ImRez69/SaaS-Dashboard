@@ -9,7 +9,7 @@ export default function Search() {
         type="text"
         value={text}
         name="search"
-        className="w-50 rounded-4xl px-3 pl-8 transition-[border-radius,box-shadow] focus:rounded-lg max-md:hidden"
+        className="w-50 rounded-4xl px-3 pl-8 transition-[border-radius,box-shadow] focus:rounded-lg max-md:hidden max-xl:w-24"
         placeholder={"جستجو"}
         onChange={(e) => setText(e.target.value)}
       />
