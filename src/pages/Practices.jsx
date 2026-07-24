@@ -132,16 +132,16 @@ function Practice({ practice, onOpenComponent, onOpenCode }) {
         </h3>
         <Badge status={practice.difficulty} />
       </div>
-      <div className="flex items-center justify-between max-xl:flex-wrap max-xl:gap-4 max-md:flex-wrap max-md:gap-4">
+      <div className="flex items-center justify-between max-xl:flex-wrap max-xl:gap-4">
         <Button
-          style={"bg-accent-bg max-md:mx-auto max-xl:mx-auto"}
+          style={"bg-accent-bg mx-auto max-xl:mx-auto"}
           onClick={() => onOpenComponent(practice.jsxElement)}
         >
           باز کردن {practice.title}
           <span className="text-xs"> (فقط در دسکتاپ)</span>
         </Button>
         <Button
-          style={"bg-accent-bg max-md:mx-auto max-xl:mx-auto"}
+          style={"bg-accent-bg mx-auto max-xl:mx-auto"}
           onClick={() => onOpenCode(practice.jsxString)}
         >
           دیدن کامپوننت<span className="text-xs"> (کامپایل‌شده)</span>
