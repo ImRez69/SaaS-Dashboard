@@ -24,7 +24,7 @@ export default function TodoItems({
   return (
     <li className="flex-center min-h-30 w-full">
       {editMode ? (
-        <div className="flex-center-between w-full px-8 py-4">
+        <div className="flex-center-between w-full px-8 py-4 max-md:gap-2 max-md:px-1">
           <textarea
             type="text"
             value={editInputValue}
@@ -54,7 +54,7 @@ export default function TodoItems({
           </div>
         </div>
       ) : (
-        <div className="flex-center-between relative w-full flex-wrap px-8 py-4">
+        <div className="flex-center-between relative w-full flex-wrap px-8 py-4 max-md:px-1">
           <label
             className={twMerge(
               "flex-center-start w-3/4 cursor-pointer pr-2 transition-all hover:opacity-70", // 1. Base & Layout Style
@@ -94,7 +94,7 @@ export default function TodoItems({
             <DeleteIcon deleteHandler={() => deleteTodo(todo?.id)} />
           </div>
 
-          <span className="text-md absolute top-4 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50">
+          <span className="text-md absolute top-4 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-50 max-md:top-0 max-md:text-sm">
             {todo.createdAt}
           </span>
         </div>
