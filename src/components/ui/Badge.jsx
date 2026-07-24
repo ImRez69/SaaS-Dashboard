@@ -54,7 +54,7 @@ export default function Badge({ status = "active", text, addText = "" }) {
   return (
     <span
       className={twMerge(
-        "text-md inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 transition-colors",
+        "text-md inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 transition-colors max-md:text-sm",
         config.style,
       )}
     >

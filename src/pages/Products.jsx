@@ -41,8 +41,8 @@ export default function Products() {
       <h1 className="text-foreground w-full text-2xl font-bold">محصولات</h1>
 
       <div className="flex w-full flex-col justify-center gap-4">
-        <div className="flex w-full justify-between gap-4">
-          <div className="w-1/4">
+        <div className="flex w-full justify-between gap-4 max-md:flex-wrap">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"ارزش کل انبار"}
               value={productsDetails.sumProductsPrice + " تومان"}
@@ -54,7 +54,7 @@ export default function Products() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"فروش هفته گذشته"}
               value={formatNumber(13210000) + " تومان"}
@@ -66,7 +66,7 @@ export default function Products() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"فروش ماه گذشته"}
               value={formatNumber(64350000) + " تومان"}
@@ -78,7 +78,7 @@ export default function Products() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"فروش سال گذشته"}
               value={formatNumber(1432710000) + " تومان"}
@@ -91,8 +91,8 @@ export default function Products() {
           </div>
         </div>
 
-        <div className="flex w-full justify-center gap-4">
-          <div className="w-1/4">
+        <div className="flex w-full justify-center gap-4 max-md:flex-wrap">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"کل محصولات"}
               value={productsDetails.allProducts.length}
@@ -104,7 +104,7 @@ export default function Products() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"محصولات در دسترس "}
               value={productsDetails.activeProduct.length}
@@ -116,7 +116,7 @@ export default function Products() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"محصولات در حال اتمام"}
               value={productsDetails.inactiveProduct.length}
@@ -128,7 +128,7 @@ export default function Products() {
             </MinStatCard>
           </div>
 
-          <div className="w-1/4">
+          <div className="w-1/4 max-md:w-full">
             <MinStatCard
               title={"محصولات ناموجود"}
               value={productsDetails.pendingProduct.length}
@@ -215,8 +215,8 @@ function TabSwitch({ activeTabId, onSwitch }) {
 
 function Searchbar({ inputValues, onChange, onClear }) {
   return (
-    <div className="flex w-full justify-between gap-4">
-      <div className="flex flex-1 justify-between gap-4">
+    <div className="flex w-full justify-between gap-4 max-md:flex-wrap">
+      <div className="flex w-full flex-1 justify-between gap-4 max-md:flex-none">
         <input
           type="text"
           name="name"
@@ -237,7 +237,7 @@ function Searchbar({ inputValues, onChange, onClear }) {
 
       <select
         name="status"
-        className=""
+        className="max-md:flex-1"
         value={inputValues.status}
         onChange={onChange}
       >
@@ -286,7 +286,9 @@ function ProductsTable({ status, products }) {
 
 function ProductsList({ status, products }) {
   return (
-    <div className={`grid grid-cols-4 gap-4 ${status ? "" : "hidden"}`}>
+    <div
+      className={`grid grid-cols-4 gap-4 ${status ? "" : "hidden"} max-md:grid-cols-1`}
+    >
       {products.map((product) => (
         <Product key={product.id} product={product} />
       ))}
@@ -302,13 +304,15 @@ function Product({ product }) {
         alt={product.name || "product-image"}
         className="light:bg-transparent light:mix-blend-multiply rounded-xl transition-opacity group-hover:opacity-80"
       />
-      <h3 className="line-clamp-2 h-18 overflow-hidden py-4 text-lg text-ellipsis">
+      <h3 className="max-md:text-md line-clamp-2 h-18 overflow-hidden py-4 text-lg text-ellipsis">
         {product.name}
       </h3>
-      <span className="my-3">دسته‌بندی: {product.category}</span>
-      <div className="flex items-center justify-between">
+      <span className="my-3 max-md:text-sm">دسته‌بندی: {product.category}</span>
+      <div className="flex items-center justify-between max-md:gap-2">
         <Badge status={product.status} />
-        <span className="text-lg">{formatNumber(product.price)}</span>
+        <span className="max-md:text-md text-lg max-md:text-center">
+          {formatNumber(product.price)}
+        </span>
       </div>
     </div>
   );

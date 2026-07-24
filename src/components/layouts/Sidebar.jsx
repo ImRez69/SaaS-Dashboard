@@ -17,7 +17,7 @@ export default function Sidebar({ activeId, onSetStatus }) {
       className={twMerge(
         "bg-surface border-border sticky top-0 flex h-screen w-64 min-w-12 flex-col gap-0.5 overflow-hidden border-l transition-[width] duration-500",
         isOpen || "w-12",
-        "max-md:w-12",
+        "max-lg:w-12 max-md:w-12",
       )}
     >
       <div className="border-border flex h-16 items-center border-b px-2">
@@ -31,7 +31,7 @@ export default function Sidebar({ activeId, onSetStatus }) {
           className={twMerge(
             "word-spacing-hover-anime opcaity-1 w-5/6 cursor-pointer text-center whitespace-nowrap transition-all hover:opacity-60",
             isOpen || "opacity-0",
-            "max-md:opacity-0",
+            "max-lg:opacity-0 max-md:opacity-0",
           )}
         >
           داشبورد SaaS

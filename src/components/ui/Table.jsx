@@ -1,6 +1,6 @@
 export default function Table({ columns, items = [] }) {
   return (
-    <div className="w-full overflow-hidden rounded-xl shadow-sm">
+    <div className="mx-auto h-100 w-full flex-1 overflow-auto rounded-xl shadow-sm max-md:w-80">
       <table className="bg-surface w-full border-collapse">
         <TableHead columns={columns} />
         <TableBody columns={columns} items={items} />
@@ -37,7 +37,7 @@ function TableHeaderCells({ columns }) {
       {columns.map((column) => (
         <th
           key={column.key}
-          className="border-border bg-border/20 border-b px-4 py-6 first:rounded-tr-xl last:rounded-tl-xl"
+          className="border-border bg-border/20 border-b px-4 py-6 whitespace-nowrap first:rounded-tr-xl last:rounded-tl-xl"
         >
           {column.label}
         </th>
@@ -54,14 +54,14 @@ function TableDataCells({ item, columns }) {
 
         if (column.render) {
           return (
-            <td key={column.key} className="max-w-100 p-4">
+            <td key={column.key} className="max-w-100 p-4 whitespace-nowrap">
               {column.render(value, item)}
             </td>
           );
         }
 
         return (
-          <td key={column.key} className="max-w-100 p-4">
+          <td key={column.key} className="max-w-100 p-4 whitespace-nowrap">
             {value}
           </td>
         );

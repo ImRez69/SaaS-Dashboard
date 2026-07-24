@@ -1,7 +1,7 @@
 export const initialProducts = [
   {
     id: 1,
-    name: "لپ تاپ 16 اینچی ایسوس مدل TUF Gaming F16 FX608JMR-F16I75060-i7 14650HX-RTX5060 8GB-32GB DDR5 5600MHz-1TB SSD-FHD 165Hz-W",
+    name: "لپ تاپ 16 اینچی ایسوس مدل TUF",
     price: 45000000,
     category: "دیجیتال",
     stock: 12,
