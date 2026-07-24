@@ -9,10 +9,10 @@ export default function Topbar({ activeId }) {
   const activeTodos = useTodos().filter((todo) => todo.status === false);
 
   return (
-    <header className="bg-surface border-border sticky top-0 z-10 flex h-16 items-center justify-between border-b px-6">
+    <header className="bg-surface border-border sticky top-0 z-10 flex h-16 items-center justify-between border-b px-6 max-md:px-1.5">
       <div className="flex items-center gap-5">
-        <Search />
-        <span className="absolute right-60 opacity-50">
+        <Search style={"max-md:hidden"} />
+        <span className="absolute right-60 opacity-50 max-md:hidden">
           تعداد کارها باقیمانده: <strong> {activeTodos.length}</strong>
         </span>
       </div>
