@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MinStatCard from "../components/ui/MinStatCard";
 import { initialProducts } from "../data/productsData";
 import Avatar from "../components/ui/avatar";
@@ -12,6 +12,10 @@ export default function Products() {
   const [activeTabId, setActiveTabId] = useState(() => {
     return JSON.parse(localStorage.getItem("activeTabId")) || 1;
   });
+
+  useEffect(() => {
+    localStorage.setItem("activeTabId", JSON.stringify(activeTabId));
+  }, [activeTabId]);
 
   const products = initialProducts;
   const productsDetails = {
@@ -33,7 +37,6 @@ export default function Products() {
 
   const tabSwitchHandle = (newId) => {
     setActiveTabId(newId);
-    localStorage.setItem("activeTabId", JSON.stringify(newId));
   };
 
   return (
@@ -287,7 +290,7 @@ function ProductsTable({ status, products }) {
 function ProductsList({ status, products }) {
   return (
     <div
-      className={`grid grid-cols-4 gap-4 ${status ? "" : "hidden"} max-md:grid-cols-1 max-xl:grid-cols-3`}
+      className={`grid grid-cols-4 gap-4 ${status ? "" : "hidden"} max-xl:grid-cols-3 max-md:grid-cols-1`}
     >
       {products.map((product) => (
         <Product key={product.id} product={product} />

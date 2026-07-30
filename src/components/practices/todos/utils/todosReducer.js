@@ -9,7 +9,6 @@ export default function todosReducer(todos, action) {
       };
       const updatedTodos = [...todos, newTodo];
 
-      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
 
@@ -24,7 +23,6 @@ export default function todosReducer(todos, action) {
           : todoItem,
       );
 
-      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
 
@@ -38,21 +36,18 @@ export default function todosReducer(todos, action) {
           : todoItem,
       );
 
-      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
 
     case "deleted": {
       const updatedTodos = todos.filter((todo) => todo.id !== action.id);
 
-      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
 
     case "cleared": {
       const updatedTodos = [];
 
-      localStorage.setItem("todoList", JSON.stringify(updatedTodos));
       return updatedTodos;
     }
   }

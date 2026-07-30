@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import { sidebarListItems } from "../../data/SidebarData";
 import Logo from "../../assets/react.svg";
@@ -11,6 +11,10 @@ export default function Sidebar({ activeId, onSetStatus }) {
   const [isOpen, setIsOpen] = useState(() =>
     JSON.parse(localStorage.getItem("sideBarIsOpen")) === false ? false : true,
   );
+
+  useEffect(() => {
+    localStorage.setItem("sideBarIsOpen", JSON.stringify(isOpen));
+  }, [isOpen]);
 
   return (
     <aside
@@ -83,7 +87,6 @@ export default function Sidebar({ activeId, onSetStatus }) {
             border={false}
             bg={false}
             onClick={() => {
-              localStorage.setItem("sideBarIsOpen", JSON.stringify(!isOpen));
               setIsOpen((prev) => !prev);
             }}
             style={"max-md:hidden"}

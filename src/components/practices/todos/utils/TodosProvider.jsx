@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useReducer, useEffect, useRef } from "react";
 import { TodosContext, TodosDispatchContext } from "./TodosContext";
 import todosReducer from "./todosReducer";
 
@@ -9,6 +9,15 @@ const todosInit = (initialTodos) => {
 
 export default function TodosProvider({ children }) {
   const [todos, todosDispatch] = useReducer(todosReducer, [], todosInit);
+  const isFirstLoading = useRef(true);
+
+  useEffect(() => {
+    if (isFirstLoading.current) {
+      isFirstLoading.current = false;
+      return;
+    }
+    localStorage.setItem("todoList", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <TodosContext value={todos}>
