@@ -24,7 +24,7 @@ export default function Sidebar({ activeId, onSetStatus }) {
         "max-lg:w-12 max-md:w-12",
       )}
     >
-      <div className="border-border flex h-16 items-center border-b px-2">
+      <div className="border-border flex min-h-16 items-center border-b px-2">
         <img
           src={Logo}
           alt={"SaaS Logo"}

@@ -3,6 +3,7 @@ import UserManagementIcon from "@mui/icons-material/PeopleAltOutlined";
 import ProductsIcon from "@mui/icons-material/CategoryOutlined";
 import PracticesIcon from "@mui/icons-material/CodeRounded";
 import TodosIcon from "@mui/icons-material/ChecklistRtlRounded";
+
 import OverviewPage from "../pages/Overview";
 import UserManagementPage from "../pages/UserManagement";
 import ProductsPage from "../pages/Products";
