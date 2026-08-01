@@ -6,7 +6,7 @@ import { initialPractices } from "../data/PracticesData";
 import MinStatCard from "../components/ui/MinStatCard";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
-import CloseIcon from "@mui/icons-material/CloseRounded";
+import Modal from "../components/ui/Modal";
 
 export default function Practices() {
   // const [practices, setPractices] = useState(initialPractices); // For later if client need to control Products like add or romove
@@ -27,12 +27,12 @@ export default function Practices() {
     ),
   };
 
-  function handleOpenComponent(jsxElement) {
+  function handleComponentModal(jsxElement) {
     setModalComponent(jsxElement);
     return;
   }
 
-  function handleOpenCode(jsxString) {
+  function handleCodeModal(jsxString) {
     setModalCode(jsxString.toString());
     return;
   }
@@ -97,20 +97,20 @@ export default function Practices() {
           <Practice
             key={practice.id}
             practice={practice}
-            onOpenComponent={handleOpenComponent}
-            onOpenCode={handleOpenCode}
+            onOpenComponent={handleComponentModal}
+            onOpenCode={handleCodeModal}
           />
         ))}
       </div>
 
       {modalComponent && (
-        <Modal onClose={() => setModalComponent(false)}>
+        <Modal onUnMount={() => setModalComponent(false)}>
           <div className="clear h-full w-full">{modalComponent}</div>
         </Modal>
       )}
 
       {modalCode && (
-        <Modal onClose={() => setModalCode(false)}>
+        <Modal onUnMount={() => setModalCode(false)}>
           <div className="w-full px-12">
             <SyntaxHighlighter language="jsx" style={atomDark}>
               {modalCode}
@@ -148,48 +148,5 @@ function Practice({ practice, onOpenComponent, onOpenCode }) {
         </Button>
       </div>
     </div>
-  );
-}
-
-function Modal({ onClose, children }) {
-  const [isClosing, setIsClosing] = useState(false);
-
-  const handleClose = () => {
-    setIsClosing(true);
-  };
-
-  const handleAnimationEnd = () => {
-    if (isClosing) onClose();
-  };
-
-  return (
-    <>
-      <div
-        className={`fixed inset-0 z-10 bg-black/50 backdrop-blur-md ${isClosing ? "animate-backdrop-out" : "animate-backdrop-in"}`}
-        onClick={handleClose}
-        onAnimationEnd={handleAnimationEnd}
-      ></div>
-
-      <div className="fixed inset-0 z-10 m-12 flex items-center justify-center">
-        <div
-          className={`border-border shadow-base bg-background flex h-full w-full flex-col items-center overflow-auto rounded-2xl border ${isClosing ? "animate-modal-out" : "animate-modal-in"}`}
-          onAnimationEnd={handleAnimationEnd}
-          dir="ltr"
-        >
-          <Button
-            style={"sticky mr-auto top-0"}
-            hover={false}
-            border={false}
-            onClick={handleClose}
-          >
-            <div className="transition-colors hover:text-rose-800">
-              <CloseIcon />
-            </div>
-          </Button>
-
-          {children}
-        </div>
-      </div>
-    </>
   );
 }
