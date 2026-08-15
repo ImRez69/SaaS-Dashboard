@@ -33,8 +33,8 @@ export default function Sidebar({ activeId, onSetStatus }) {
 
         <h4
           className={twMerge(
-            "word-spacing-hover-anime opcaity-1 w-5/6 cursor-pointer text-center whitespace-nowrap transition-all hover:opacity-60",
-            isOpen || "opacity-0",
+            "word-spacing-hover-anime w-5/6 cursor-pointer text-center whitespace-nowrap opacity-100 transition-all hover:opacity-60",
+            isOpen || "hidden",
             "max-lg:opacity-0 max-md:opacity-0",
           )}
         >
@@ -65,8 +65,8 @@ export default function Sidebar({ activeId, onSetStatus }) {
       >
         <div
           className={twMerge(
-            "opcaity-1 transition-opacity",
-            isOpen || "opcaity-0",
+            "opacity-100 transition-opacity",
+            isOpen || "hidden",
             "max-md:opacity-0",
           )}
         >
@@ -130,8 +130,8 @@ function ListItem({ item, status, onSetStatus, isOpen }) {
 
       <span
         className={twMerge(
-          "opcaity-1 transition-opacity",
-          isOpen || "opacity-0",
+          "opacity-100 transition-opacity",
+          isOpen || "hidden",
         )}
       >
         {item.title}
