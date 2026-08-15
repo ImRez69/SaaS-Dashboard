@@ -57,7 +57,7 @@ export default function ShoppingCart() {
       <div className="flex-center gap-8 pt-4">
         <Button onClick={addItemHandler}>Add Item</Button>
 
-        <Button onClick={clearCartHandler} style={"bg-red-900"}>
+        <Button onClick={clearCartHandler}customClassName={"bg-red-900"}>
           Clear Cart
         </Button>
       </div>
@@ -75,7 +75,7 @@ export default function ShoppingCart() {
           onClick={(e) => {
             addItemHandler(e, new FormData("add-item"));
           }}
-          style={"w-2/10"}
+         customClassName={"w-2/10"}
         >
           Add Item
         </Button>

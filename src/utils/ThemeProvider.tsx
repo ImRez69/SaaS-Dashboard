@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { ThemeContext } from "./ThemeContext.js";
+import { ThemeContext } from "./ThemeContext";
 
-export default function ThemeProvider({ children }) {
+interface ThemeProviderProps {
+  children: React.ReactNode;
+}
+
+export default function ThemeProvider({ children }: ThemeProviderProps) {
   const [isLight, setIslight] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
     return savedTheme ? savedTheme === "light" : false;

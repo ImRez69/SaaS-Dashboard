@@ -89,7 +89,7 @@ export default function Sidebar({ activeId, onSetStatus }) {
             onClick={() => {
               setIsOpen((prev) => !prev);
             }}
-            style={"max-md:hidden"}
+           customClassName={"max-md:hidden"}
           >
             <SidebarIcon
               sx={{

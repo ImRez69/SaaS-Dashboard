@@ -43,7 +43,7 @@ export default function Modal({ onUnMount, children }) {
             dir="ltr"
           >
             <Button
-              style={"sticky mr-auto top-0"}
+             customClassName={"sticky mr-auto top-0"}
               hover={false}
               border={false}
               onClick={handleClose}

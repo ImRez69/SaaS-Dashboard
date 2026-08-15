@@ -112,7 +112,7 @@ export default function Practices() {
       {modalCode && (
         <Modal onUnMount={() => setModalCode(false)}>
           <div className="w-full px-12">
-            <SyntaxHighlighter language="jsx" style={atomDark}>
+            <SyntaxHighlighter language="jsx"customClassName={atomDark}>
               {modalCode}
             </SyntaxHighlighter>
           </div>
@@ -134,14 +134,14 @@ function Practice({ practice, onOpenComponent, onOpenCode }) {
       </div>
       <div className="flex items-center justify-between max-xl:flex-wrap max-xl:gap-4">
         <Button
-          style={"bg-accent-bg mx-auto max-xl:mx-auto"}
+         customClassName={"bg-accent-bg mx-auto max-xl:mx-auto"}
           onClick={() => onOpenComponent(practice.jsxElement)}
         >
           باز کردن {practice.title}
           <span className="text-xs"> (فقط در دسکتاپ)</span>
         </Button>
         <Button
-          style={"bg-accent-bg mx-auto max-xl:mx-auto"}
+         customClassName={"bg-accent-bg mx-auto max-xl:mx-auto"}
           onClick={() => onOpenCode(practice.jsxString)}
         >
           دیدن کامپوننت<span className="text-xs"> (کامپایل‌شده)</span>

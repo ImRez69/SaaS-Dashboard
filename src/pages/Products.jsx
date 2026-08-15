@@ -198,7 +198,7 @@ function TabSwitch({ activeTabId, onSwitch }) {
       <span>حالت نمایش: </span>
 
       <Button
-        style={`rounded-l-none border-l-0 ${activeTabId === 1 && "bg-muted/20"}`}
+       customClassName={`rounded-l-none border-l-0 ${activeTabId === 1 && "bg-muted/20"}`}
         hover={false}
         onClick={() => onSwitch(1)}
       >
@@ -206,7 +206,7 @@ function TabSwitch({ activeTabId, onSwitch }) {
       </Button>
 
       <Button
-        style={`rounded-r-none border-r-0 ${activeTabId === 2 && "bg-muted/20"}`}
+       customClassName={`rounded-r-none border-r-0 ${activeTabId === 2 && "bg-muted/20"}`}
         hover={false}
         onClick={() => onSwitch(2)}
       >

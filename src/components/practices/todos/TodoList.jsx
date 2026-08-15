@@ -23,7 +23,7 @@ export default function TodoList({
       })}
 
       <Button
-        style={`border-border mt-4 gap-2 flex-center  ${todos.length > 0 ? "" : "hidden"}`}
+       customClassName={`border-border mt-4 gap-2 flex-center  ${todos.length > 0 ? "" : "hidden"}`}
         onClick={onClearAllTodo}
       >
         حذف همه

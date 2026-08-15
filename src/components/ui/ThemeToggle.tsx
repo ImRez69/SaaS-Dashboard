@@ -1,4 +1,4 @@
-import { useTheme } from "../../utils/ThemeContext.js";
+import { useTheme } from "../../utils/ThemeContext";
 import DarkModeIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeIcon from "@mui/icons-material/LightModeRounded";
 import Button from "./Button";

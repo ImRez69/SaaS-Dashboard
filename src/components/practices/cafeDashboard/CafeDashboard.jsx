@@ -131,7 +131,7 @@ export default function CafeDashboard() {
       />
 
       <OrderBox
-        style={"mx-auto mb-4 w-[90%]"}
+       customClassName={"mx-auto mb-4 w-[90%]"}
         h3Title={"In Progress Orders"}
         orders={orders}
         onNextStage={handleNextStage}
@@ -140,7 +140,7 @@ export default function CafeDashboard() {
 
       {prevOrders.length > 0 && (
         <OrderBox
-          style={"mx-auto w-[90%]"}
+         customClassName={"mx-auto w-[90%]"}
           h3Title={"Delivered Orders"}
           orders={prevOrders}
         />
