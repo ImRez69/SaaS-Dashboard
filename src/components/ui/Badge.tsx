@@ -1,3 +1,8 @@
+import type {
+  GeneralStatus,
+  StockStatus,
+  DifficultyLevel,
+} from "../../types/status";
 import { twMerge } from "tailwind-merge";
 
 const statusConfig = {
@@ -47,10 +52,6 @@ const statusConfig = {
     dotStyle: "bg-rose-500",
   },
 };
-
-type GeneralStatus = "active" | "inactive" | "pending";
-type StockStatus = "available" | "low_stock" | "out_of_stock";
-type DifficultyLevel = "easy" | "normal" | "hard";
 
 type BadgeStatus = GeneralStatus | StockStatus | DifficultyLevel;
 

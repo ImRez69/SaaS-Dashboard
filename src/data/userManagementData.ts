@@ -1,4 +1,6 @@
-export const initialUsers = [
+import type { User } from "../types/user";
+
+export const initialUsers: User[] = [
   {
     id: 1,
     avatar: "https://i.pravatar.cc/150?img=11",
@@ -6,7 +8,6 @@ export const initialUsers = [
     email: "ali.mohammadi@example.com",
     role: "مدیر سیستم",
     status: "active",
-    createdAt: "1402/10/12",
   },
   {
     id: 2,
@@ -15,7 +16,6 @@ export const initialUsers = [
     email: "sara.ahmadi@example.com",
     role: "برنامه‌نویس",
     status: "active",
-    createdAt: "1402/11/05",
   },
   {
     id: 3,
@@ -24,7 +24,6 @@ export const initialUsers = [
     email: "reza.karimi@example.com",
     role: "طراح UI/UX",
     status: "inactive",
-    createdAt: "1402/11/20",
   },
   {
     id: 4,
@@ -33,7 +32,6 @@ export const initialUsers = [
     email: "maryam.h@example.com",
     role: "پشتیبان",
     status: "active",
-    createdAt: "1402/12/01",
   },
   {
     id: 5,
@@ -42,6 +40,5 @@ export const initialUsers = [
     email: "mehdi.q@example.com",
     role: "برنامه‌نویس",
     status: "pending",
-    createdAt: "1402/12/15",
   },
 ];

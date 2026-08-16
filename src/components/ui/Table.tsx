@@ -1,4 +1,19 @@
-export default function Table({ columns, items = [] }) {
+import type { ReactNode } from "react";
+import type { User } from "../../types/user";
+
+type Users = User[];
+type Columns = {
+  key: keyof User;
+  label: string;
+  render?: (value: string | number, item?: string) => ReactNode;
+}[];
+
+interface TableProps {
+  columns: Columns;
+  items: Users;
+}
+
+export default function Table({ columns, items = [] }: TableProps) {
   return (
     <div className="mx-auto h-100 w-full flex-1 overflow-auto rounded-xl shadow-sm max-md:w-80">
       <table className="bg-surface w-full border-collapse">
@@ -9,7 +24,11 @@ export default function Table({ columns, items = [] }) {
   );
 }
 
-function TableHead({ columns }) {
+interface TableHeadProps {
+  columns: Columns;
+}
+
+function TableHead({ columns }: TableHeadProps) {
   return (
     <thead>
       <TableRow>
@@ -19,7 +38,12 @@ function TableHead({ columns }) {
   );
 }
 
-function TableBody({ columns, items }) {
+interface TableBodyProps {
+  columns: Columns;
+  items: Users;
+}
+
+function TableBody({ columns, items }: TableBodyProps) {
   return (
     <tbody className="divide-border divide-y">
       {items.map((item) => (
@@ -31,7 +55,11 @@ function TableBody({ columns, items }) {
   );
 }
 
-function TableHeaderCells({ columns }) {
+interface TableHeaderCellsProps {
+  columns: Columns;
+}
+
+function TableHeaderCells({ columns }: TableHeaderCellsProps) {
   return (
     <>
       {columns.map((column) => (
@@ -46,7 +74,12 @@ function TableHeaderCells({ columns }) {
   );
 }
 
-function TableDataCells({ item, columns }) {
+interface TableDataCellsProps {
+  columns: Columns;
+  item: User;
+}
+
+function TableDataCells({ item, columns }: TableDataCellsProps) {
   return (
     <>
       {columns.map((column) => {
@@ -55,7 +88,7 @@ function TableDataCells({ item, columns }) {
         if (column.render) {
           return (
             <td key={column.key} className="max-w-100 p-4 whitespace-nowrap">
-              {column.render(value, item)}
+              {column.render(value, item.name)}
             </td>
           );
         }
@@ -70,7 +103,11 @@ function TableDataCells({ item, columns }) {
   );
 }
 
-function TableRow({ children }) {
+interface TableRow {
+  children: ReactNode;
+}
+
+function TableRow({ children }: TableRow) {
   return (
     <tr className="even:bg-border/20 hover:bg-border/80 text-center transition-[background-color]">
       {children}

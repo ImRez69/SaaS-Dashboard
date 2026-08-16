@@ -87,10 +87,10 @@ function UsersTable({ users }) {
     {
       key: "avatar",
       label: "تصویر",
-      render: (value, item) => (
+      render: (value, userName) => (
         <Avatar
           src={value}
-          userName={item.name}
+          userName={userName}
           customClassName="transition-all hover:opacity-60 cursor-default"
           onlyImage
         />
