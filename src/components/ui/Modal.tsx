@@ -1,10 +1,14 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import Button from "./Button";
 import CloseIcon from "@mui/icons-material/CloseRounded";
 
-export default function Modal({ onUnMount, children }) {
+interface ModalProps {
+  onUnMount: () => void;
+  children: ReactNode;
+}
+export default function Modal({ onUnMount, children }: ModalProps) {
   const [isClosing, setIsClosing] = useState(false);
-  const dialogRef = useRef(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   const handleClose = () => {
     setIsClosing(true);
@@ -43,7 +47,7 @@ export default function Modal({ onUnMount, children }) {
             dir="ltr"
           >
             <Button
-             customClassName={"sticky mr-auto top-0"}
+              customClassName={"sticky mr-auto top-0"}
               hover={false}
               border={false}
               onClick={handleClose}

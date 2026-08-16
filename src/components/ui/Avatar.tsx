@@ -1,6 +1,18 @@
 import { twMerge } from "tailwind-merge";
 
-export default function Avatar({ src, alt, onlyImage = false, style = null }) {
+interface AvatarProps {
+  src: string;
+  alt: string;
+  onlyImage?: boolean;
+  customClassName?: string | null;
+}
+
+export default function Avatar({
+  src,
+  alt,
+  onlyImage = false,
+  customClassName = null,
+}: AvatarProps) {
   return (
     <div className="flex cursor-pointer items-center justify-center gap-2">
       {onlyImage || <strong>{alt}</strong>}
@@ -14,7 +26,7 @@ export default function Avatar({ src, alt, onlyImage = false, style = null }) {
           "", // 3. Responsive & Dark Mode Style
           "", // 4. Interaction Style
           "", // 5. Animation Style
-          [style], // 6. Conditional Styles
+          [customClassName], // 6. Conditional Styles
         )}
       />
     </div>

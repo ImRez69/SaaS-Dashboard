@@ -3,7 +3,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { initialPractices } from "../data/PracticesData";
-import MinStatCard from "../components/ui/MinStatCard";
+import MinStatCard from "../components/ui/MinStatCard.tsx";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
 import Modal from "../components/ui/Modal";

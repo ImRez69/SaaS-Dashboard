@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MinStatCard from "../components/ui/MinStatCard";
+import MinStatCard from "../components/ui/MinStatCard.tsx";
 import { initialProducts } from "../data/productsData";
 import Avatar from "../components/ui/avatar";
 import Badge from "../components/ui/Badge";
@@ -265,7 +265,7 @@ function ProductsTable({ status, products }) {
         <Avatar
           src={value}
           alt={item.name}
-          style="transition-all hover:opacity-60 cursor-default"
+          customClassName="transition-all hover:opacity-60 cursor-default"
           onlyImage
         />
       ),

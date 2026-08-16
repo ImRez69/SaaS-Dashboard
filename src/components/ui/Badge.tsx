@@ -48,7 +48,18 @@ const statusConfig = {
   },
 };
 
-export default function Badge({ status = "active", text, addText = "" }) {
+type GeneralStatus = "active" | "inactive" | "pending";
+type StockStatus = "available" | "low_stock" | "out_of_stock";
+type DifficultyLevel = "easy" | "normal" | "hard";
+
+type BadgeStatus = GeneralStatus | StockStatus | DifficultyLevel;
+
+interface BadgeProps {
+  status: BadgeStatus;
+  text?: string;
+}
+
+export default function Badge({ status, text }: BadgeProps) {
   const config = statusConfig[status];
 
   return (
@@ -59,8 +70,6 @@ export default function Badge({ status = "active", text, addText = "" }) {
       )}
     >
       <span className={twMerge("h-1.5 w-1.5 rounded-full", config.dotStyle)} />
-      {addText > 0 && <strong>{addText}</strong>}
-
       {text || config.label}
     </span>
   );

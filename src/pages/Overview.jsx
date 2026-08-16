@@ -1,4 +1,4 @@
-import MinStatCard from "../components/ui/MinStatCard";
+import MinStatCard from "../components/ui/MinStatCard.tsx";
 import SparklineChart from "../components/ui/SparklineChart";
 import SparklineBarChart from "../components/ui/SparklineBarChart";
 import OverviewChart from "../components/ui/OverviewChart";

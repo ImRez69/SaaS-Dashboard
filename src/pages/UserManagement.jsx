@@ -1,7 +1,7 @@
 import { initialUsers } from "../data/userManagementData";
 import Avatar from "../components/ui/Avatar";
 import Badge from "../components/ui/Badge";
-import MinStatCard from "../components/ui/MinStatCard";
+import MinStatCard from "../components/ui/MinStatCard.tsx";
 import Table from "../components/ui/Table";
 import { useState } from "react";
 import Button from "../components/ui/Button";
@@ -91,7 +91,7 @@ function UsersTable({ users }) {
         <Avatar
           src={value}
           userName={item.name}
-          style="transition-all hover:opacity-60 cursor-default"
+          customClassName="transition-all hover:opacity-60 cursor-default"
           onlyImage
         />
       ),

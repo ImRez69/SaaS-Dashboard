@@ -1,8 +1,9 @@
 import type { ComponentPropsWithoutRef } from "react";
+import type { ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 interface ButtonProps extends ComponentPropsWithoutRef<"button"> {
-  children: React.ReactNode;
+  children: ReactNode;
   disable?: boolean;
   hover?: boolean;
   bg?: boolean;

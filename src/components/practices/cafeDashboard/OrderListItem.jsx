@@ -44,7 +44,7 @@ export default function OrderListItem({ order, onNextStage, onCancelOrder }) {
       </span>
 
       <Button
-       customClassName={`hover:shadow-base w-[10%] text-center text-lg capitalize transition-all text-shadow-lg ${liBgCheck(status)}`}
+        customClassName={`hover:shadow-base w-[10%] text-center text-lg capitalize transition-all text-shadow-lg ${liBgCheck(status)}`}
         onClick={(e) => onNextStage(e, order.id)}
         disable={status === "complete" || status === "canceled"}
       >
@@ -52,7 +52,7 @@ export default function OrderListItem({ order, onNextStage, onCancelOrder }) {
       </Button>
 
       <Button
-        style="hover:shadow-base w-[10%] text-center text-lg capitalize transition-all text-shadow-lg bg-red-900/90"
+        customClassName="hover:shadow-base w-[10%] text-center text-lg capitalize transition-all text-shadow-lg bg-red-900/90"
         onClick={(e) => onCancelOrder(e, order.id)}
         disable={status === "complete" || status === "canceled"}
       >
