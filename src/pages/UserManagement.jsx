@@ -1,7 +1,7 @@
 import { initialUsers } from "../data/userManagementData";
 import Avatar from "../components/ui/Avatar";
 import Badge from "../components/ui/Badge";
-import MinStatCard from "../components/ui/MinStatCard.tsx";
+import MinStatCard from "../components/ui/MinStatCard";
 import Table from "../components/ui/Table";
 import { useState } from "react";
 import Button from "../components/ui/Button";

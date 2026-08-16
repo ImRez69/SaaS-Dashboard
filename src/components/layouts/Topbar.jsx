@@ -1,7 +1,7 @@
 import { sidebarListItems } from "../../data/SidebarData";
 import { useTodos } from "../../components/practices/todos/utils/TodosContext";
 import Avatar from "../ui/avatar";
-import Search from "../ui/Search";
+import SearchBar from "../ui/SearchBar";
 import ThemeToggle from "../ui/ThemeToggle";
 
 export default function Topbar({ activeId }) {
@@ -11,7 +11,7 @@ export default function Topbar({ activeId }) {
   return (
     <header className="bg-surface border-border sticky top-0 z-10 flex h-16 items-center justify-between border-b px-6 max-md:px-1.5">
       <div className="flex items-center gap-5">
-        <Search />
+        <SearchBar />
         <span className="absolute right-60 opacity-50 max-lg:hidden max-xl:right-35">
           تعداد کارها باقیمانده: <strong> {activeTodos.length}</strong>
         </span>

@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
-import type { User } from "../../types/user";
+import type { Users, User } from "../../types/user";
 
-type Users = User[];
 type Columns = {
   key: keyof User;
   label: string;
