@@ -1,4 +1,6 @@
-export const initialProducts = [
+import type { Products } from "../types/product";
+
+export const initialProducts: Products = [
   {
     id: 1,
     name: "لپ تاپ 16 اینچی ایسوس مدل TUF",

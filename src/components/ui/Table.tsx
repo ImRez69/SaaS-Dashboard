@@ -1,13 +1,15 @@
 import type { ReactNode } from "react";
-import type { Users, User } from "../../types/user";
-import type { Columns } from "../../types/table";
+import type { Columns, Items, Item } from "../../types/table";
 
-interface TableProps {
-  columns: Columns;
-  items: Users;
+interface TableProps<T> {
+  columns: Columns<T>;
+  items: Items<T>;
 }
 
-export default function Table({ columns, items = [] }: TableProps) {
+export default function Table<T extends { id: string | number }>({
+  columns,
+  items = [],
+}: TableProps<T>) {
   return (
     <div className="mx-auto h-100 w-full flex-1 overflow-auto rounded-xl shadow-sm max-md:w-80">
       <table className="bg-surface w-full border-collapse">
@@ -18,11 +20,11 @@ export default function Table({ columns, items = [] }: TableProps) {
   );
 }
 
-interface TableHeadProps {
-  columns: Columns;
+interface TableHeadProps<T> {
+  columns: Columns<T>;
 }
 
-function TableHead({ columns }: TableHeadProps) {
+function TableHead<T>({ columns }: TableHeadProps<T>) {
   return (
     <thead>
       <TableRow>
@@ -32,12 +34,15 @@ function TableHead({ columns }: TableHeadProps) {
   );
 }
 
-interface TableBodyProps {
-  columns: Columns;
-  items: Users;
+interface TableBodyProps<T> {
+  columns: Columns<T>;
+  items: Items<T>;
 }
 
-function TableBody({ columns, items }: TableBodyProps) {
+function TableBody<T extends { id: string | number }>({
+  columns,
+  items,
+}: TableBodyProps<T>) {
   return (
     <tbody className="divide-border divide-y">
       {items.map((item) => (
@@ -49,11 +54,11 @@ function TableBody({ columns, items }: TableBodyProps) {
   );
 }
 
-interface TableHeaderCellsProps {
-  columns: Columns;
+interface TableHeaderCellsProps<T> {
+  columns: Columns<T>;
 }
 
-function TableHeaderCells({ columns }: TableHeaderCellsProps) {
+function TableHeaderCells<T>({ columns }: TableHeaderCellsProps<T>) {
   return (
     <>
       {columns.map((column) => (
@@ -68,12 +73,12 @@ function TableHeaderCells({ columns }: TableHeaderCellsProps) {
   );
 }
 
-interface TableDataCellsProps {
-  columns: Columns;
-  item: User;
+interface TableDataCellsProps<T> {
+  columns: Columns<T>;
+  item: Item<T>;
 }
 
-function TableDataCells({ item, columns }: TableDataCellsProps) {
+function TableDataCells<T>({ item, columns }: TableDataCellsProps<T>) {
   return (
     <>
       {columns.map((column) => {
@@ -82,7 +87,7 @@ function TableDataCells({ item, columns }: TableDataCellsProps) {
         if (column.render) {
           return (
             <td key={column.key} className="max-w-100 p-4 whitespace-nowrap">
-              {column.render(value, item.name)}
+              {column.render(value, item)}
             </td>
           );
         }

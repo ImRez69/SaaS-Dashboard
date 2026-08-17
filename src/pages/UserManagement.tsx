@@ -5,9 +5,11 @@ import MinStatCard from "../components/ui/MinStatCard";
 import Table from "../components/ui/Table";
 import { useState, type ChangeEvent } from "react";
 import Button from "../components/ui/Button";
-import type { Users } from "../types/user";
+import type { Users, User } from "../types/user";
 import type { Columns } from "../types/table";
 import { isGeneralStatus } from "../types/status";
+
+type ChangeEventHandle = ChangeEvent<HTMLInputElement | HTMLSelectElement>;
 
 export default function UsersManagement() {
   // const [users, setUsers] = useState(initialUsers); // For later if client need to control users like add or romove
@@ -89,15 +91,15 @@ function UsersTable({ users }: UsersTableProps) {
     role: "همه نقش ها",
   });
 
-  const columns: Columns = [
+  const columns: Columns<User> = [
     { key: "id", label: "شناسه" },
     {
       key: "avatar",
       label: "تصویر",
-      render: (value, userName) => (
+      render: (value, user) => (
         <Avatar
           src={value}
-          alt={userName}
+          alt={user?.name}
           customClassName="transition-all hover:opacity-60 cursor-default"
           onlyImage
         />
@@ -128,7 +130,7 @@ function UsersTable({ users }: UsersTableProps) {
     return matchName && matchEmail && matchRole;
   });
 
-  function changeHandle(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
+  function changeHandle(e: ChangeEventHandle) {
     setInputValues((prevValues) => {
       return { ...prevValues, [e.target.name]: e.target.value };
     });
@@ -154,7 +156,7 @@ type SearchFields = "name" | "email" | "role";
 
 interface SearchbarProps {
   inputValues: Record<SearchFields, string>;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onChange: (e: ChangeEventHandle) => void;
   onClear: () => void;
 }
 

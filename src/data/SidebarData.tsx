@@ -6,7 +6,7 @@ import TodosIcon from "@mui/icons-material/ChecklistRtlRounded";
 
 import OverviewPage from "../pages/Overview";
 import UserManagementPage from "../pages/UserManagement";
-import ProductsPage from "../pages/Products";
+import ProductsPage from "../pages/Products.tsx";
 import PracticesPage from "../pages/Practices";
 import TodosPage from "../components/practices/todos/Todos";
 

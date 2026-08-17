@@ -1,16 +1,23 @@
-import { useEffect, useState } from "react";
-import MinStatCard from "../components/ui/MinStatCard.tsx";
-import { initialProducts } from "../data/productsData";
-import Avatar from "../components/ui/avatar";
+import { useEffect, useState, type ChangeEvent } from "react";
+import MinStatCard from "../components/ui/MinStatCard.js";
+import { initialProducts } from "../data/productsData.js";
+import Avatar from "../components/ui/Avatar";
 import Badge from "../components/ui/Badge";
 import Button from "../components/ui/Button";
 import Table from "../components/ui/Table";
 import formatNumber from "../utils/formatNumber";
+import type { Products, Product } from "../types/product";
+import type { Columns } from "../types/table";
+import { isStockStatus } from "../types/status.js";
+
+type ActiveTabId = "list" | "table";
+type ChangeEventHandle = ChangeEvent<HTMLInputElement | HTMLSelectElement>;
 
 export default function Products() {
   // const [products, setProducts] = useState(initialProducts); // For later if client need to control Products like add or romove
-  const [activeTabId, setActiveTabId] = useState(() => {
-    return JSON.parse(localStorage.getItem("activeTabId")) || 1;
+  const [activeTabId, setActiveTabId] = useState<ActiveTabId>(() => {
+    const savedActiveTabId = localStorage.getItem("activeTabId");
+    return savedActiveTabId ? JSON.parse(savedActiveTabId) : "list";
   });
 
   useEffect(() => {
@@ -35,8 +42,8 @@ export default function Products() {
     ),
   };
 
-  const tabSwitchHandle = (newId) => {
-    setActiveTabId(newId);
+  const tabSwitchHandle = (nextTabId: ActiveTabId) => {
+    setActiveTabId(nextTabId);
   };
 
   return (
@@ -153,7 +160,12 @@ export default function Products() {
   );
 }
 
-function ProductsSection({ activeTabId, products }) {
+interface ProductsSectionProps {
+  activeTabId: ActiveTabId;
+  products: Products;
+}
+
+function ProductsSection({ activeTabId, products }: ProductsSectionProps) {
   const [inputValues, setInputValues] = useState({
     name: "",
     category: "",
@@ -169,7 +181,7 @@ function ProductsSection({ activeTabId, products }) {
     return matchName && matchCategory && matchStatus;
   });
 
-  function changeHandle(e) {
+  function changeHandle(e: ChangeEventHandle) {
     setInputValues((prevValues) => {
       return { ...prevValues, [e.target.name]: e.target.value };
     });
@@ -186,29 +198,37 @@ function ProductsSection({ activeTabId, products }) {
         onChange={changeHandle}
         onClear={clearHandle}
       />
-      <ProductsList status={activeTabId === 1} products={filteredItems} />
-      <ProductsTable status={activeTabId === 2} products={filteredItems} />
+      <ProductsList status={activeTabId === "list"} products={filteredItems} />
+      <ProductsTable
+        status={activeTabId === "table"}
+        products={filteredItems}
+      />
     </>
   );
 }
 
-function TabSwitch({ activeTabId, onSwitch }) {
+interface TabSwitchProps {
+  activeTabId: ActiveTabId;
+  onSwitch: (nextTabId: ActiveTabId) => void;
+}
+
+function TabSwitch({ activeTabId, onSwitch }: TabSwitchProps) {
   return (
     <div>
       <span>حالت نمایش: </span>
 
       <Button
-       customClassName={`rounded-l-none border-l-0 ${activeTabId === 1 && "bg-muted/20"}`}
+        customClassName={`rounded-l-none border-l-0 ${activeTabId === "list" && "bg-muted/20"}`}
         hover={false}
-        onClick={() => onSwitch(1)}
+        onClick={() => onSwitch("list")}
       >
         لیست
       </Button>
 
       <Button
-       customClassName={`rounded-r-none border-r-0 ${activeTabId === 2 && "bg-muted/20"}`}
+        customClassName={`rounded-r-none border-r-0 ${activeTabId === "table" && "bg-muted/20"}`}
         hover={false}
-        onClick={() => onSwitch(2)}
+        onClick={() => onSwitch("table")}
       >
         جدول
       </Button>
@@ -216,7 +236,15 @@ function TabSwitch({ activeTabId, onSwitch }) {
   );
 }
 
-function Searchbar({ inputValues, onChange, onClear }) {
+type SearchFields = "name" | "category" | "status";
+
+interface SearchbarProps {
+  inputValues: Record<SearchFields, string>;
+  onChange: (e: ChangeEventHandle) => void;
+  onClear: () => void;
+}
+
+function Searchbar({ inputValues, onChange, onClear }: SearchbarProps) {
   return (
     <div className="flex w-full justify-between gap-4 max-md:flex-wrap">
       <div className="flex w-full flex-1 justify-between gap-4 max-md:flex-none">
@@ -255,8 +283,15 @@ function Searchbar({ inputValues, onChange, onClear }) {
   );
 }
 
-function ProductsTable({ status, products }) {
-  const columns = [
+type ProductsTableColumns = Columns<Product>;
+
+interface UsersTableProps {
+  status: boolean;
+  products: Products;
+}
+
+function ProductsTable({ status, products }: UsersTableProps) {
+  const columns: ProductsTableColumns = [
     { key: "id", label: "شناسه" },
     {
       key: "image",
@@ -264,7 +299,7 @@ function ProductsTable({ status, products }) {
       render: (value, item) => (
         <Avatar
           src={value}
-          alt={item.name}
+          alt={item?.name}
           customClassName="transition-all hover:opacity-60 cursor-default"
           onlyImage
         />
@@ -275,7 +310,14 @@ function ProductsTable({ status, products }) {
     {
       key: "status",
       label: "وضعیت",
-      render: (value) => <Badge status={value} />,
+      render: (value) => {
+        if (isStockStatus(value)) {
+          return <Badge status={value} />;
+        } else {
+          console.warn(`Unexpected stock value: "${value}" `);
+          return <Badge status={"pending"} text="Invalid Stock" />;
+        }
+      },
     },
   ];
   return (
@@ -287,7 +329,11 @@ function ProductsTable({ status, products }) {
   );
 }
 
-function ProductsList({ status, products }) {
+interface ProductsListProps {
+  status: boolean;
+  products: Products;
+}
+function ProductsList({ status, products }: ProductsListProps) {
   return (
     <div
       className={`grid grid-cols-4 gap-4 ${status ? "" : "hidden"} max-xl:grid-cols-3 max-md:grid-cols-1`}
@@ -299,7 +345,10 @@ function ProductsList({ status, products }) {
   );
 }
 
-function Product({ product }) {
+interface ProductProps {
+  product: Product;
+}
+function Product({ product }: ProductProps) {
   return (
     <div className="bg-surface border-border group shadow-base flex flex-col rounded-2xl border p-4">
       <img
