@@ -3,7 +3,7 @@ import Button from "./Button";
 
 interface MinStatCardProps {
   title: string;
-  value: string;
+  value: string | number;
   children: ReactNode;
 }
 

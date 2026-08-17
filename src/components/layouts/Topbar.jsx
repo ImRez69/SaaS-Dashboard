@@ -1,7 +1,7 @@
 import { sidebarListItems } from "../../data/SidebarData";
 import { useTodos } from "../../components/practices/todos/utils/TodosContext";
 import Avatar from "../ui/avatar";
-import SearchBar from "../ui/SearchBar";
+import SearchBar from "../ui/Search";
 import ThemeToggle from "../ui/ThemeToggle";
 
 export default function Topbar({ activeId }) {

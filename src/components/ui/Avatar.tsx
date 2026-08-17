@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 
 interface AvatarProps {
   src: string;
-  alt: string;
+  alt?: string;
   onlyImage?: boolean;
   customClassName?: string | null;
 }

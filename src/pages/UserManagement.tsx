@@ -3,8 +3,11 @@ import Avatar from "../components/ui/Avatar";
 import Badge from "../components/ui/Badge";
 import MinStatCard from "../components/ui/MinStatCard";
 import Table from "../components/ui/Table";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import Button from "../components/ui/Button";
+import type { Users } from "../types/user";
+import type { Columns } from "../types/table";
+import { isGeneralStatus } from "../types/status";
 
 export default function UsersManagement() {
   // const [users, setUsers] = useState(initialUsers); // For later if client need to control users like add or romove
@@ -75,14 +78,18 @@ export default function UsersManagement() {
   );
 }
 
-function UsersTable({ users }) {
+interface UsersTableProps {
+  users: Users;
+}
+
+function UsersTable({ users }: UsersTableProps) {
   const [inputValues, setInputValues] = useState({
     name: "",
     email: "",
     role: "همه نقش ها",
   });
 
-  const columns = [
+  const columns: Columns = [
     { key: "id", label: "شناسه" },
     {
       key: "avatar",
@@ -90,7 +97,7 @@ function UsersTable({ users }) {
       render: (value, userName) => (
         <Avatar
           src={value}
-          userName={userName}
+          alt={userName}
           customClassName="transition-all hover:opacity-60 cursor-default"
           onlyImage
         />
@@ -102,7 +109,14 @@ function UsersTable({ users }) {
     {
       key: "status",
       label: "وضعیت",
-      render: (value) => <Badge status={value} />,
+      render: (value) => {
+        if (isGeneralStatus(value)) {
+          return <Badge status={value} />;
+        } else {
+          console.warn(`Unexpected status value: "${value}" `);
+          return <Badge status={"pending"} text="Invalid Status" />;
+        }
+      },
     },
   ];
 
@@ -114,7 +128,7 @@ function UsersTable({ users }) {
     return matchName && matchEmail && matchRole;
   });
 
-  function changeHandle(e) {
+  function changeHandle(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     setInputValues((prevValues) => {
       return { ...prevValues, [e.target.name]: e.target.value };
     });
@@ -136,7 +150,15 @@ function UsersTable({ users }) {
   );
 }
 
-function Searchbar({ inputValues, onChange, onClear }) {
+type SearchFields = "name" | "email" | "role";
+
+interface SearchbarProps {
+  inputValues: Record<SearchFields, string>;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onClear: () => void;
+}
+
+function Searchbar({ inputValues, onChange, onClear }: SearchbarProps) {
   return (
     <div className="flex w-full justify-between gap-4 max-md:flex-wrap">
       <div className="flex w-full flex-1 justify-between gap-4 max-md:flex-none">

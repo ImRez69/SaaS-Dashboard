@@ -1,11 +1,6 @@
 import type { ReactNode } from "react";
 import type { Users, User } from "../../types/user";
-
-type Columns = {
-  key: keyof User;
-  label: string;
-  render?: (value: string | number, item?: string) => ReactNode;
-}[];
+import type { Columns } from "../../types/table";
 
 interface TableProps {
   columns: Columns;
@@ -82,7 +77,7 @@ function TableDataCells({ item, columns }: TableDataCellsProps) {
   return (
     <>
       {columns.map((column) => {
-        const value = item[column.key];
+        const value = String(item[column.key]);
 
         if (column.render) {
           return (
