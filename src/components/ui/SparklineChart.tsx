@@ -1,10 +1,18 @@
 import { ResponsiveContainer, AreaChart, Area } from "recharts";
 
+import type { RevenueSparkData } from "../../types/overview";
+
+interface SparklineChartProps {
+  data: RevenueSparkData;
+  dataKey: string;
+  color: string;
+}
+
 export default function SparklineChart({
   data,
   dataKey = "value",
   color = "#6366f1",
-}) {
+}: SparklineChartProps) {
   return (
     <div className="dir-ltr h-16 w-full">
       <ResponsiveContainer width="100%" height="100%">

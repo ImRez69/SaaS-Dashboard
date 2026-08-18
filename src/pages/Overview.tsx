@@ -1,4 +1,4 @@
-import MinStatCard from "../components/ui/MinStatCard.tsx";
+import MinStatCard from "../components/ui/MinStatCard";
 import SparklineChart from "../components/ui/SparklineChart";
 import SparklineBarChart from "../components/ui/SparklineBarChart";
 import OverviewChart from "../components/ui/OverviewChart";
@@ -7,7 +7,7 @@ import {
   revenueSparkData,
   subscriptionSparkData,
   overviewMainChartData,
-} from "../data/overviewData";
+} from "../data/overviewData.js";
 
 export default function Overview() {
   return (

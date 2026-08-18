@@ -8,7 +8,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-export default function OverviewChart({ data }) {
+import type { OverviewMainChartData } from "../../types/overview";
+
+interface OverviewChartProps {
+  data: OverviewMainChartData;
+}
+
+export default function OverviewChart({ data }: OverviewChartProps) {
   return (
     <div className="bg-surface border-border flex flex-col gap-4 rounded-xl border p-5 shadow-sm">
       <div className="flex items-center justify-between">
@@ -57,10 +63,14 @@ export default function OverviewChart({ data }) {
 
             <Tooltip
               separator=": "
-              formatter={(value) => [
-                `${value.toLocaleString("en-US").replace(/,/g, "،")} تومان`,
-                "درآمد",
-              ]}
+              formatter={(value) => {
+                if (value) {
+                  return [
+                    `${value.toLocaleString("en-US").replace(/,/g, "،")} تومان`,
+                    "درآمد",
+                  ];
+                }
+              }}
               contentStyle={{
                 backgroundColor: "var(--bg-surface, #1e293b)",
                 borderColor: "rgba(255, 255, 255, 0.1)",

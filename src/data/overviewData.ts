@@ -1,4 +1,10 @@
-export const revenueSparkData = [
+import type {
+  RevenueSparkData,
+  SubscriptionSparkData,
+  OverviewMainChartData,
+} from "../types/overview";
+
+export const revenueSparkData: RevenueSparkData = [
   { val: 10 },
   { val: 25 },
   { val: 18 },
@@ -7,7 +13,7 @@ export const revenueSparkData = [
   { val: 45 },
 ];
 
-export const subscriptionSparkData = [
+export const subscriptionSparkData: SubscriptionSparkData = [
   { val: 30 },
   { val: 60 },
   { val: 40 },
@@ -17,7 +23,7 @@ export const subscriptionSparkData = [
   { val: 110 },
 ];
 
-export const overviewMainChartData = [
+export const overviewMainChartData: OverviewMainChartData = [
   { month: "فروردین", revenue: 7000000 },
   { month: "اردیبهشت", revenue: 12000000 },
   { month: "خرداد", revenue: 23000000 },

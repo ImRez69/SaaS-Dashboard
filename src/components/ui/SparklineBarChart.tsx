@@ -1,10 +1,18 @@
 import { ResponsiveContainer, BarChart, Bar } from "recharts";
 
+import type { SubscriptionSparkData } from "../../types/overview";
+
+interface SparklineBarChartProps {
+  data: SubscriptionSparkData;
+  dataKey: string;
+  color: string;
+}
+
 export default function SparklineBarChart({
   data,
   dataKey = "value",
   color = "#8b5cf6",
-}) {
+}: SparklineBarChartProps) {
   return (
     <div className="dir-ltr h-16 w-full">
       <ResponsiveContainer width="100%" height="100%">
