@@ -7,10 +7,14 @@ import Avatar from "../ui/Avatar";
 import SidebarIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import Button from "../ui/Button";
 
-import type { SidebarListItem, OnChangePage } from "../../types/sidebar";
+import type {
+  SidebarListItem,
+  SidebarListsId,
+  OnChangePage,
+} from "../../types/sidebar";
 
 interface SidebarProps {
-  activePageId: string;
+  activePageId: SidebarListsId;
   onChangePage: OnChangePage;
 }
 
