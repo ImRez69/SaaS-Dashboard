@@ -3,24 +3,34 @@ import { twMerge } from "tailwind-merge";
 import { sidebarListItems } from "../../data/SidebarData";
 import Logo from "../../assets/react.svg";
 import ThemeToggle from "../ui/ThemeToggle";
-import Avatar from "../ui/avatar";
+import Avatar from "../ui/Avatar";
 import SidebarIcon from "@mui/icons-material/ArrowBackIosNewRounded";
 import Button from "../ui/Button";
 
-export default function Sidebar({ activeId, onSetStatus }) {
-  const [isOpen, setIsOpen] = useState(() =>
-    JSON.parse(localStorage.getItem("sideBarIsOpen")) === false ? false : true,
-  );
+import type { SidebarListItem, OnChangePage } from "../../types/sidebar";
+
+interface SidebarProps {
+  activePageId: string;
+  onChangePage: OnChangePage;
+}
+
+export default function Sidebar({ activePageId, onChangePage }: SidebarProps) {
+  const [sideBarStatus, setSideBarStatus] = useState<"open" | "close">(() => {
+    const savedSideBarStatus = localStorage.getItem("sideBarStatus");
+    return savedSideBarStatus ? JSON.parse(savedSideBarStatus) : "open";
+  });
+
+  const isOpen = sideBarStatus === "open";
 
   useEffect(() => {
-    localStorage.setItem("sideBarIsOpen", JSON.stringify(isOpen));
-  }, [isOpen]);
+    localStorage.setItem("sideBarStatus", JSON.stringify(sideBarStatus));
+  }, [sideBarStatus]);
 
   return (
     <aside
       className={twMerge(
-        "bg-surface border-border sticky top-0 flex h-screen w-64 min-w-12 flex-col gap-0.5 overflow-hidden border-l transition-[width] duration-500",
-        isOpen || "w-12",
+        "bg-surface border-border sticky top-0 flex h-screen min-w-12 flex-col gap-0.5 overflow-hidden border-l transition-[width] duration-500",
+        isOpen ? "w-64" : "w-12",
         "max-lg:w-12 max-md:w-12",
       )}
     >
@@ -34,7 +44,7 @@ export default function Sidebar({ activeId, onSetStatus }) {
         <h4
           className={twMerge(
             "word-spacing-hover-anime w-5/6 cursor-pointer text-center whitespace-nowrap opacity-100 transition-all hover:opacity-60",
-            isOpen || "hidden",
+            isOpen ? "" : "hidden",
             "max-lg:opacity-0 max-md:opacity-0",
           )}
         >
@@ -48,8 +58,8 @@ export default function Sidebar({ activeId, onSetStatus }) {
             <ListItem
               key={item.id}
               item={item}
-              status={item.id === activeId}
-              onSetStatus={onSetStatus}
+              status={item.id === activePageId}
+              onChangePage={onChangePage}
               isOpen={isOpen}
             />
           ))}
@@ -59,14 +69,14 @@ export default function Sidebar({ activeId, onSetStatus }) {
       <div
         className={twMerge(
           "border-border flex items-center justify-between border-t p-4",
-          isOpen || "justify-center",
+          isOpen ? "" : "justify-center",
           "max-md:justify-center",
         )}
       >
         <div
           className={twMerge(
             "opacity-100 transition-opacity",
-            isOpen || "hidden",
+            isOpen ? "" : "hidden",
             "max-md:opacity-0",
           )}
         >
@@ -78,7 +88,7 @@ export default function Sidebar({ activeId, onSetStatus }) {
         </div>
 
         <div className="flex gap-2">
-          <div className={twMerge(isOpen || "hidden")}>
+          <div className={isOpen ? "" : "hidden"}>
             <ThemeToggle />
           </div>
 
@@ -87,14 +97,14 @@ export default function Sidebar({ activeId, onSetStatus }) {
             border={false}
             bg={false}
             onClick={() => {
-              setIsOpen((prev) => !prev);
+              setSideBarStatus((prev) => (prev === "open" ? "close" : "open"));
             }}
-           customClassName={"max-md:hidden"}
+            customClassName={"max-md:hidden"}
           >
             <SidebarIcon
               sx={{
                 transition: "transform 0.35s ease-in-out",
-                transform: isOpen ? "rotate(-180deg)" : "",
+                transform: isOpen ? "" : "rotate(-180deg)",
               }}
             />
           </Button>
@@ -104,7 +114,14 @@ export default function Sidebar({ activeId, onSetStatus }) {
   );
 }
 
-function ListItem({ item, status, onSetStatus, isOpen }) {
+interface ListItemProps {
+  item: SidebarListItem;
+  status: boolean;
+  onChangePage: OnChangePage;
+  isOpen: boolean;
+}
+
+function ListItem({ item, status, onChangePage, isOpen }: ListItemProps) {
   return (
     <li
       className={twMerge(
@@ -115,7 +132,7 @@ function ListItem({ item, status, onSetStatus, isOpen }) {
         "transition-[background-color,color] duration-200", // 5. Animation Style
         [status && "text-foreground hover:text-foreground-h bg-muted/10"],
       )}
-      onClick={() => onSetStatus(item.id)}
+      onClick={() => onChangePage(item.id)}
     >
       <span
         className={twMerge(
@@ -131,7 +148,7 @@ function ListItem({ item, status, onSetStatus, isOpen }) {
       <span
         className={twMerge(
           "opacity-100 transition-opacity",
-          isOpen || "hidden",
+          isOpen ? "" : "hidden",
         )}
       >
         {item.title}
