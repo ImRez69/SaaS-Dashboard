@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useState, type ReactElement } from "react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import { initialPractices } from "../data/PracticesData";
-import MinStatCard from "../components/ui/MinStatCard.tsx";
+import MinStatCard from "../components/ui/MinStatCard";
 import Button from "../components/ui/Button";
 import Badge from "../components/ui/Badge";
 import Modal from "../components/ui/Modal";
+import type { Practices, Practice } from "../types/practice";
+
+type ModalComponent = ReactElement | boolean | null;
+type ModalCode = string | boolean | null;
 
 export default function Practices() {
   // const [practices, setPractices] = useState(initialPractices); // For later if client need to control Products like add or romove
-  const [modalComponent, setModalComponent] = useState(null);
-  const [modalCode, setModalCode] = useState(null);
+  const [modalComponent, setModalComponent] = useState<ModalComponent>(null);
+  const [modalCode, setModalCode] = useState<ModalCode>(null);
 
   const practices = initialPractices;
   const practicesDetails = {
@@ -27,14 +31,12 @@ export default function Practices() {
     ),
   };
 
-  function handleComponentModal(jsxElement) {
+  function handleComponentModal(jsxElement: ReactElement) {
     setModalComponent(jsxElement);
-    return;
   }
 
-  function handleCodeModal(jsxString) {
-    setModalCode(jsxString.toString());
-    return;
+  function handleCodeModal(jsxString: string) {
+    if (jsxString) setModalCode(jsxString.toString());
   }
 
   return (
@@ -112,8 +114,8 @@ export default function Practices() {
       {modalCode && (
         <Modal onUnMount={() => setModalCode(false)}>
           <div className="w-full px-12">
-            <SyntaxHighlighter language="jsx"customClassName={atomDark}>
-              {modalCode}
+            <SyntaxHighlighter language="jsx" style={atomDark}>
+              {String(modalCode)}
             </SyntaxHighlighter>
           </div>
         </Modal>
@@ -122,7 +124,13 @@ export default function Practices() {
   );
 }
 
-function Practice({ practice, onOpenComponent, onOpenCode }) {
+interface PracticeProps {
+  practice: Practice;
+  onOpenComponent: (jsxElement: ReactElement) => void;
+  onOpenCode: (jsxString: string) => void;
+}
+
+function Practice({ practice, onOpenComponent, onOpenCode }: PracticeProps) {
   return (
     <div className="bg-surface border-border group shadow-base col-span-2 flex flex-col rounded-2xl border p-4">
       <div className="flex items-center justify-between">
@@ -134,14 +142,14 @@ function Practice({ practice, onOpenComponent, onOpenCode }) {
       </div>
       <div className="flex items-center justify-between max-xl:flex-wrap max-xl:gap-4">
         <Button
-         customClassName={"bg-accent-bg mx-auto max-xl:mx-auto"}
+          customClassName={"bg-accent-bg mx-auto max-xl:mx-auto"}
           onClick={() => onOpenComponent(practice.jsxElement)}
         >
           باز کردن {practice.title}
           <span className="text-xs"> (فقط در دسکتاپ)</span>
         </Button>
         <Button
-         customClassName={"bg-accent-bg mx-auto max-xl:mx-auto"}
+          customClassName={"bg-accent-bg mx-auto max-xl:mx-auto"}
           onClick={() => onOpenCode(practice.jsxString)}
         >
           دیدن کامپوننت<span className="text-xs"> (کامپایل‌شده)</span>
