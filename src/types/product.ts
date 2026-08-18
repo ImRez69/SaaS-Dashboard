@@ -10,4 +10,4 @@ export interface Product {
   image: string;
 }
 
-export type Products = Product[];
+export type Products = Array<Product>;

@@ -9,4 +9,4 @@ export interface User {
   status: GeneralStatus;
 }
 
-export type Users = User[];
+export type Users = Array<User>;

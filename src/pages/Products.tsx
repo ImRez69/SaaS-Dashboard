@@ -283,15 +283,13 @@ function Searchbar({ inputValues, onChange, onClear }: SearchbarProps) {
   );
 }
 
-type ProductsTableColumns = Columns<Product>;
-
 interface UsersTableProps {
   status: boolean;
   products: Products;
 }
 
 function ProductsTable({ status, products }: UsersTableProps) {
-  const columns: ProductsTableColumns = [
+  const columns: Columns<Product> = [
     { key: "id", label: "شناسه" },
     {
       key: "image",
